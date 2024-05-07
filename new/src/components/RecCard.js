@@ -24,7 +24,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function TestCard() {
+export default function RecCard() {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
