@@ -5,18 +5,18 @@ import SignInFormD from './components/SignInFormD';
 import SignInFormO from './components/SignInFormO';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
-
+import FAQ from './components/FAQ';
 
 function App() {
   return (
     <>
     <Router>
      <Navbar />
-     
       <Routes>
       <Route path='/' exact />
       <Route path="/signup-organization" element={<SignInFormO />} />
       <Route path="/signup-donor" element={<SignInFormD />} />
+      <Route path='/FAQ' element={<FAQ />} />
       <Route path="/login" element={<LoginForm />} />
       </Routes>
     </Router>

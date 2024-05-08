@@ -1,4 +1,5 @@
-import React, {/*{useState}*/} from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import "./SignInFormD.css";
 import user_icon from "./images/loginsignup/person.png"
 import email_icon from "./images/loginsignup/email.png"
@@ -33,7 +34,7 @@ const SignInFormD = () => {
     </div>
 
 </div>
-<div className='forgot-password'>Lost Password? <span>Click Here!</span></div>
+<div className='forgot-password'>Already Registered? <span><Link to='/login'>Click Here!</Link></span></div>
 <div className='submit-container'>
     <div className='submit'>Sign Up</div>
     </div>
