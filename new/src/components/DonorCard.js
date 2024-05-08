@@ -9,9 +9,9 @@ import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import AssignRider from './AssignRider';
+//import AssignRider from './AssignRider';
 import modalImage from './images/modal.jpeg';
-
+//import ListFood from './ListFood';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -50,7 +50,8 @@ export default function RecCard() {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-      <AssignRider/>
+      {/* <ListFood/> */}
+
         {/* <IconButton aria-label="">
           <ShareIcon />
         </IconButton> */}
