@@ -6,6 +6,7 @@ import SignInFormO from './components/SignInFormO';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import FAQ from './components/FAQ';
+import DashboardDonor from './components/DashboardDonor';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="/signup-donor" element={<SignInFormD />} />
       <Route path='/FAQ' element={<FAQ />} />
       <Route path="/login" element={<LoginForm />} />
+      <Route path="/dashboard-donor" element={<DashboardDonor />} />
       </Routes>
     </Router>
     </>

@@ -3,7 +3,7 @@ import React from 'react'
 const DashboardDonor = () => {
   return (
     <>
-        <div>hello</div>
+        <div className='user-info'></div>
     </>
   )
 }
