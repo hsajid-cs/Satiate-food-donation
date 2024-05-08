@@ -5,14 +5,15 @@ import SignInFormD from './components/SignInFormD';
 import SignInFormO from './components/SignInFormO';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
-import TestCard from './components/RecCard';
+import RecCard from './components/RecCard';
+import ListFood from './components/ListFood';
 
 function App() {
   return (
     <>
     <Router>
      <Navbar />
-     <div style={{alignItems:'center'}}><TestCard/></div>
+     <ListFood/>
      
       <Routes>
       <Route path='/' exact />
