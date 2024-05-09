@@ -10,6 +10,8 @@ import DonorProfile from './components/DonorProfile';
 import DonorCard from './components/DonorCard';
 // import Box from "@mui/material/Box";
 // import { Grid } from '@mui/material';
+import FAQ from './components/FAQ';
+import DashboardDonor from './components/DashboardDonor';
 
 function App() {
   return (
@@ -17,7 +19,8 @@ function App() {
     <Router>
  
      <Navbar />
-     <DonorCard/>
+
+    {/* //  <DonorCard/> */}
      {/* <Box
   display="flex"
   justifyContent="center"
@@ -35,7 +38,9 @@ function App() {
       <Route path="/stories" element={<DonorProfile />} />
       <Route path="/signup-organization" element={<SignInFormO />} />
       <Route path="/signup-donor" element={<SignInFormD />} />
+      <Route path='/FAQ' element={<FAQ />} />
       <Route path="/login" element={<LoginForm />} />
+      <Route path="/dashboard-donor" element={<DashboardDonor />} />
       </Routes>
     </Router>
     </>

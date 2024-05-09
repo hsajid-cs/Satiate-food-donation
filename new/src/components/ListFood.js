@@ -5,10 +5,11 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import MenuItem from '@mui/material/MenuItem';
 
 export default function ListFood() {
   const [open, setOpen] = React.useState(false);
+  const [servingSize, setServingSize] = React.useState(20);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -16,6 +17,16 @@ export default function ListFood() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleServingSizeChange = (event) => {
+    const size = parseInt(event.target.value);
+    if (size > 20) { // Check if serving size is greater than 20
+      setServingSize(size);
+    } else {
+      setServingSize(20); // If not greater than 20, set it to 20
+    }
+  };
+
 
   return (
     <React.Fragment>
@@ -38,18 +49,7 @@ export default function ListFood() {
       >
         <DialogTitle>List New Food</DialogTitle>
         <DialogContent>
-          
-          {/* <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="name"
-            name="name"
-            label="Name of Rider"
-            type="name"
-            fullWidth
-            variant="outlined"
-          /> */}
+
           <TextField
             autoFocus
             required
@@ -58,8 +58,8 @@ export default function ListFood() {
             name="description"
             label="Description"
             maxRows={5}
-            size="medium"
-            type="file"
+            type="text"
+            size='medium'
             multiline
             fullWidth
             variant="outlined"
@@ -70,8 +70,16 @@ export default function ListFood() {
             margin="dense"
             id="expiry"
             name="expiry"
-            helperText="Expiry Date"
-            type="Date"
+            helperText="Expiry Date (Starts from day after tomorrow)"
+            type="date"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            InputProps={{
+              inputProps: {
+                min: new Date(new Date().getTime() + 2 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // Set minimum date as the day after tomorrow
+              },
+            }}
             fullWidth
             variant="outlined"
           />
@@ -82,8 +90,20 @@ export default function ListFood() {
             id="contact"
             name="contact"
             type="number"
-            defaultValue="20"
-            helperText="Serving Size"
+            value={servingSize} // Set the value of the input field to the current serving size state
+            onChange={handleServingSizeChange} // Call handleServingSizeChange when the value changes
+            helperText="Serving Size (Min. 20)"
+            fullWidth
+            variant="outlined"
+          />
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="image"
+            name="image"
+            helperText="Add Image"
+            type="file"
             fullWidth
             variant="outlined"
           />
@@ -92,7 +112,6 @@ export default function ListFood() {
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button type="submit" >Add</Button>
-          {/* style={{ color: 'white', backgroundColor: 'green' }} */}
         </DialogActions>
       </Dialog>
     </React.Fragment>

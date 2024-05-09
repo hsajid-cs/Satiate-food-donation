@@ -33,10 +33,9 @@ const SignInFormO = () => {
     </div>
 
 </div>
-<div className='forgot-password'>Already Registered? <span>Click Here!</span></div>
+<div className='forgot-password'>Already Registered? <span><Link to='/login'>Click Here!</Link></span></div>
 <div className='submit-container'>
     <div className='submit'>Sign Up</div>
-    <Link to='/login'><div className='submit'>Log In</div></Link>
     </div>
   </div>);
 };
