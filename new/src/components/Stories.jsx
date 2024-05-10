@@ -9,8 +9,7 @@ import Collapse from '@mui/material/Collapse';
  import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
  import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-// import modalImage from './images/modal.jpeg';
-// import ListFood from './ListFood';
+
 
 const CardContainer = styled('div')({
   display: 'grid',
@@ -40,9 +39,9 @@ const DonorCard = () => {
 
   return (
     <CardContainer>
-      {Array.from({ length: 4 }).map((_, index) => (
+       {Array.from({ length: 6 }).map((_, index) => ( 
         <Card
-          key={index}
+           key={index}
           sx={{
             backgroundColor: '#f5f5f5',
             borderRadius: '8px',
@@ -50,9 +49,44 @@ const DonorCard = () => {
             width: '100%',
           }}
         >
-       
+          <CardHeader
+            title="Story Title"
+            subheader="Donor Name"
+           
+          />
+          <CardMedia
+            component="img"
+            height="194"
+            image="https://source.unsplash.com/random"
+            alt="random"
+          />
+          <CardContent>
+            <Typography variant="body2" color="text.secondary">
+              Description
+            </Typography>
+          </CardContent>
+          <CardActions disableSpacing>
+            <ExpandMore
+              expand={expanded}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+            >
+              <ExpandMoreIcon />
+            </ExpandMore>
+          </CardActions>
+          <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <CardContent>
+              <Typography paragraph>Details:</Typography>
+              <Typography paragraph>
+               blah blah blah
+              </Typography>
+            </CardContent>
+          </Collapse>
         </Card>
-      ))}
+       
+      )) 
+       } 
     </CardContainer>
   );
 };
