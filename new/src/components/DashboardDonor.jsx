@@ -9,7 +9,8 @@ import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
+import CollapsibleTable from './UserTable';
+import UserTable from './UserTable';
 const CardContainer = styled('div')({
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
@@ -42,6 +43,7 @@ const DashboardDonor = ({ numCards }) => {
   const cardWidth = numCards <= 2 ? '40%' : 'calc(70% - 10px)'; // Adjust width based on the number of cards
 
   return (
+    <>
     <CardContainer>
       {Array.from({ length: numCards }).map((_, index) => (
         <Card
@@ -87,8 +89,11 @@ const DashboardDonor = ({ numCards }) => {
             </CardContent>
           </Collapse>
         </Card>
+        
       ))}
     </CardContainer>
+   <UserTable/>
+   </>
   );
 };
 
