@@ -40,7 +40,7 @@ function App() {
       <Route path="/signup-donor" element={<SignInFormD />} />
       <Route path='/FAQ' element={<FAQ />} />
       <Route path="/login" element={<LoginForm />} />
-      <Route path="/dashboard-donor" element={<DashboardDonor numCards={3} />} />
+      <Route path="/dashboard-donor" element={<DashboardDonor numCards={1} />} />
       </Routes>
     </Router>
     </>
