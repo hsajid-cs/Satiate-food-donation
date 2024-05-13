@@ -11,6 +11,8 @@ import Stories from './components/Stories';
 // import Box from "@mui/material/Box";
 // import { Grid } from '@mui/material';
 import FAQ from './components/FAQ';
+import DashboardRider from './components/DashboardRider';
+import DashboardRecipient from './components/DashboardRecipient';
 import DashboardDonor from './components/DashboardDonor';
 
 function App() {
@@ -41,6 +43,8 @@ function App() {
       <Route path='/FAQ' element={<FAQ />} />
       <Route path="/login" element={<LoginForm />} />
       <Route path="/dashboard-donor" element={<DashboardDonor numCards={1} />} />
+      <Route path="/dashboard-recipient" element={<DashboardRecipient numCards={2} />} />
+      <Route path="/dashboard-rider" element={<DashboardRider numCards={3} />} />
       </Routes>
     </Router>
     </>

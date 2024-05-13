@@ -9,7 +9,7 @@ import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import UserTable from './UserTable';
+// import UserTable from './UserTable';
 const CardContainer = styled('div')({
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
@@ -29,7 +29,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const DashboardDonor = ({ numCards }) => {
+const DashboardRider = ({ numCards }) => {
   const [expanded, setExpanded] = React.useState({});
 
   const handleExpandClick = (index) => {
@@ -91,9 +91,9 @@ const DashboardDonor = ({ numCards }) => {
         
       ))}
     </CardContainer>
-   <UserTable/>
+   {/* <UserTable/> */}
    </>
   );
 };
 
-export default DashboardDonor;
+export default DashboardRider;
