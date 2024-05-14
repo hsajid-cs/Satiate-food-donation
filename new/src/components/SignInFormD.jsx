@@ -5,6 +5,7 @@ import user_icon from "./images/loginsignup/person.png"
 import email_icon from "./images/loginsignup/email.png"
 import password_icon from "./images/loginsignup/password.png"
 import location_icon from "./images/loginsignup/loc.png"
+import contact_icon from "./images/loginsignup/contact.png"
 
 
 const SignInFormD = () => {
@@ -13,6 +14,12 @@ const SignInFormD = () => {
         setSelectedValue(event.target.value);
       };
 
+      if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition((position) => {
+            console.log(position.coords.latitude);
+            console.log(position.coords.longitude);
+        })
+    }
 
   return (
   <div className='login-container'>
@@ -35,13 +42,19 @@ const SignInFormD = () => {
         <input type='email' placeholder='Email'></input>
     </div>
     <div className='login-input'>
-        <img src={email_icon} alt="Envelope" />
-        <input type='email' placeholder='Phone Number'></input>
+        <img src={contact_icon} alt="Telephone" />
+        <input type='text' placeholder='Phone Number'></input>
     </div>
     <div className='login-input'>
         <img src={location_icon} alt="location" />
-        <input type='text' placeholder='Location'></input>
+        <input type='text' placeholder='Address'></input>
     </div>
+    {selectedValue === "Restaurant" && (
+                    <div className='login-input'>
+                        <img src={location_icon} alt="location" />
+                        <input type='text' placeholder='Restaurant Name'></input>
+                    </div>
+                )}
     <div className='login-input'>
         <img src={password_icon} alt="Password" />
         <input type='password' placeholder='Password'></input>
