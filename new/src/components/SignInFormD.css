@@ -106,7 +106,11 @@
 
 }
 
-Link div{
+a{
+    text-decoration: none;
+    color: #1ea27e;
+}
+div span Link{
     text-decoration: none;
 }
 /*  */

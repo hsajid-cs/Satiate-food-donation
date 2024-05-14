@@ -9,9 +9,8 @@ import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import AssignRider from './AssignRider';
 import modalImage from './images/modal.jpeg';
-
+import ListFood from './ListFood';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -24,15 +23,24 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function TestCard() {
+export default function DonorCard() {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
-  };
+  }; 
+
+  
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: '600px ',
+    maxHeight: '100%',
+      
+      backgroundColor: '#f5f5f5',
+      borderRadius: '8px',
+      boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+      margin: '0 auto',
+    }}>
       <CardHeader
         title="Username"
         subheader="Listing Date"
@@ -50,7 +58,8 @@ export default function TestCard() {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-      <AssignRider/>
+      <ListFood/>
+
         {/* <IconButton aria-label="">
           <ShareIcon />
         </IconButton> */}
