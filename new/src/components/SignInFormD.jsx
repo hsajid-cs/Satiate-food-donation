@@ -1,27 +1,18 @@
-import React, {/*{useState}*/} from 'react';
-import "./SignInFormD.css";
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import "./SignInFormD.css";
 import user_icon from "./images/loginsignup/person.png"
 import email_icon from "./images/loginsignup/email.png"
 import password_icon from "./images/loginsignup/password.png"
 import location_icon from "./images/loginsignup/loc.png"
 
-// const API_endpoint = './https://api.openweathermap.org/data/2.5/onecall?'
-// const API_key=`92fc613b7f106ab35db4146af4a9cdd4`
+
 const SignInFormD = () => {
-    // const [latitude, setLatitude] = useState('');
-    // const [longitude, setLongitude] = useState('');
-    // React.useEffect(() => {
-    //     navigator.geolocation.getCurrentPosition(function(position) {
-    //         console.log("Latitude is :", position.coords.latitude);
-    //         console.log("Longitude is :", position.coords.longitude);
-    //       });
-    //       axios.get(`${API_endpoint}lat=${latitude}&lon=${longitude}&exclude=hourly,daily&appid=${API_key}`)
-    //       .then((response) => {
-    //         console.log(response.data);
-    //       });
-    // }, []);
+    const [selectedValue, setSelectedValue] = useState('');
+    const handleSelectChange = (event) => {
+        setSelectedValue(event.target.value);
+      };
+
   return (
   <div className='login-container'>
     <div className='header'>
@@ -29,6 +20,11 @@ const SignInFormD = () => {
         <div className='underline'></div>
     </div>
 <div className='login-inputs'>
+<select className="user-type" value={selectedValue} onChange={handleSelectChange}>
+        <option value="">Who are you?</option>
+        <option value="Individual">Individual</option>
+        <option value="Restaurant">Restaurant</option>
+      </select>
     <div className='login-input'>
         <img src={user_icon} alt="person" />
         <input type='text' placeholder='Username'></input>
@@ -36,6 +32,10 @@ const SignInFormD = () => {
     <div className='login-input'>
         <img src={email_icon} alt="Envelope" />
         <input type='email' placeholder='Email'></input>
+    </div>
+    <div className='login-input'>
+        <img src={email_icon} alt="Envelope" />
+        <input type='email' placeholder='Phone Number'></input>
     </div>
     <div className='login-input'>
         <img src={location_icon} alt="location" />
@@ -47,10 +47,9 @@ const SignInFormD = () => {
     </div>
 
 </div>
-<div className='forgot-password'>Lost Password? <span>Click Here!</span></div>
+<div className='forgot-password'>Already Registered? <span><Link to='/login'>Click Here!</Link></span></div>
 <div className='submit-container'>
     <div className='submit'>Sign Up</div>
-    <Link to='/login'><div className='submit'>Log In</div></Link>
     </div>
   </div>);
 };
