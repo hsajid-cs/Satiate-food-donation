@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Button } from './Button';
@@ -26,15 +26,27 @@ const Overlay = styled.div`
 `;
 
 function Navbar() {
+
+  const [showModal, setShowModal] = useState(false);
+  const [click, setClick] = useState(false);
+  const [button1, setButton1] = useState(true);
+  const [button2, setButton2] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleClick = () => setClick(!click);
+  const closeMobileMenu = () => setClick(false);
+
   const navigate = useNavigate();
   const handleLoginClick = (e) => {
     e.preventDefault();
-    navigate('/login');
-    closeMobileMenu();
+    navigate('/login');    closeMobileMenu();
   }
-  
-  const [showModal, setShowModal] = useState(false);
 
+  useEffect(() => {
+    // Check if user is logged in (You should replace this with your actual authentication logic)
+    const userIsLoggedIn = false;
+    setIsLoggedIn(userIsLoggedIn);
+  }, []);
   const openModal = () => {
     setShowModal(prev => !prev);
   }
@@ -46,12 +58,6 @@ function Navbar() {
     e.preventDefault();
     openModal();
   };
-  const [click, setClick] = useState(false);
-  const [button1, setButton1] = useState(true);
-  const [button2, setButton2] = useState(true);
-
-  const handleClick = () => setClick(!click);
-  const closeMobileMenu = () => setClick(false);
 
   const showButton = () => {
     if (window.innerWidth <= 960) {
@@ -66,6 +72,8 @@ function Navbar() {
         item.style.display = 'none';})
     }
   }
+
+
 
     window.addEventListener('resize', showButton);
 
@@ -82,21 +90,22 @@ function Navbar() {
             
             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
             {window.innerWidth <= 960 && (
-    <li className="nav-item mobile-only">
-      <Link to="/" className="nav-links" onClick={closeMobileMenu}>
-        Sign Up  
-      </Link>
-    </li>)}
+                <li className="nav-item mobile-only">
+                  <Link to="/" className="nav-links" onClick={closeMobileMenu}>
+                    Sign Up  
+                  </Link>
+                </li>
+              )
+            }
 
-    {window.innerWidth <= 960 && (<li className="nav-item mobile-only">
-      <Link 
-        to="/login"
-        className="nav-links"
-        onClick={closeMobileMenu}
-      >
-        Log In
-      </Link>
-    </li>)}
+            {window.innerWidth <= 960 && (
+                <li className="nav-item mobile-only">
+                  <Link to="/login" className="nav-links" onClick={closeMobileMenu}>
+                     Log In
+                  </Link>
+                </li>
+              )
+            }
               <li className='nav-item'>
                 <Link to='/stories' className='nav-links' onClick={closeMobileMenu}>
                   Stories
@@ -114,12 +123,31 @@ function Navbar() {
                   FAQ
                 </Link>
               </li>
+
             </ul>
             <div className="btn-wrapper">
-            <Link to='/' onClick={handleLoginClick}> {window.innerWidth >= 960 && button1 && <Button buttonStyle='btn--outline' >Log In</Button>} </Link>
+            {isLoggedIn ? (
+              <>
+                  <Link to="/notifications" className='user-links'>
+                    <i className="fas fa-bell" />
+                  </Link>
+                  <Link to="/profile" className='user-links'>
+                    <i className="fas fa-user"  />
+                  </Link>
+              </>
+            ) : (
+              <><Link to='/' onClick={handleLoginClick}> 
+              {window.innerWidth >= 960 && button1 && <Button buttonStyle='btn--outline' >Log In</Button>} 
+              </Link>
  
-  {window.innerWidth >= 960 && button2 && <Button buttonStyle='btn--outline' onClick={handleSignupClick}>Sign Up</Button>}
-</div>
+              {window.innerWidth >= 960 && button2 && 
+                <Button buttonStyle='btn--outline' onClick={handleSignupClick}>
+                  Sign Up
+                </Button>
+              }
+                </>)}
+              
+            </div>
         </div>
     </nav>
     {showModal && (
