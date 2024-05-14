@@ -39,13 +39,12 @@ function Navbar() {
   const navigate = useNavigate();
   const handleLoginClick = (e) => {
     e.preventDefault();
-    navigate('/login');
-    closeMobileMenu();
+    navigate('/login');    closeMobileMenu();
   }
 
   useEffect(() => {
     // Check if user is logged in (You should replace this with your actual authentication logic)
-    const userIsLoggedIn = !false;
+    const userIsLoggedIn = false;
     setIsLoggedIn(userIsLoggedIn);
   }, []);
   const openModal = () => {
