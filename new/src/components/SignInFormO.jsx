@@ -1,27 +1,20 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import "./SignInFormD.css";
 import { Link } from 'react-router-dom';
 import user_icon from "./images/loginsignup/person.png"
 import email_icon from "./images/loginsignup/email.png"
 import password_icon from "./images/loginsignup/password.png"
 import location_icon from "./images/loginsignup/loc.png"
-import axios from 'axios';
-
-const API_ENDPOINT=`https://api.openweathermap.org/data/2.5/onecall?`;
-const API_KEY=`92fc613b7f106ab35db4146af4a9cdd4`;
+import contact_icon from "./images/loginsignup/contact.png"
 
 const SignInFormO = () => {
-    const [latitude, setLatitude] = React.useState('');
-    const [longitude, setLongitude] = React.useState('');
-    useEffect(() => {
+    if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition((position) => {
-            setLatitude(position.coords.latitude);
-            setLongitude(position.coords.longitude);
+            console.log(position.coords.latitude);
+            console.log(position.coords.longitude);
         })
-    },[latitude, longitude]);
-    axios.get(`${API_ENDPOINT}lat=${latitude}&lon=${longitude}&exclude=hourly,daily&appid=${API_KEY}`).then((response) => {
-        console.log(response.data);
-    })
+    }
+
   return (
   <div className='login-container'>
     <div className='header'>
@@ -34,8 +27,8 @@ const SignInFormO = () => {
         <input type='text' placeholder='Username'></input>
     </div>
     <div className='login-input'>
-        <img src={email_icon} alt="Envelope" />
-        <input type='email' placeholder='Phone Number'></input>
+        <img src={contact_icon} alt="Telephone" />
+        <input type='text' placeholder='Phone Number'></input>
     </div>
     <div className='login-input'>
         <img src={email_icon} alt="Envelope" />
