@@ -1,8 +1,8 @@
 import React,{useState} from 'react'
 import "./SignInFormD.css"
-
 import user_icon from "./images/loginsignup/person.png"
 import password_icon from "./images/loginsignup/password.png"
+import axios from 'axios'
 
 const LoginForm = () => {
   const [selectedValue, setSelectedValue] = useState('');
@@ -21,12 +21,34 @@ const LoginForm = () => {
     setPassword(event.target.value);
   };
 
-
-  const handleLoginEvent = (e) => {
+  const handleLoginEvent = async (e) => {
     e.preventDefault();
     console.log('Selected Value:', selectedValue);
     console.log('Username:', username);
     console.log('Password:', password);
+
+    try {
+      let endpoint;
+      if (selectedValue === 'Donor') {
+        endpoint = 'http://localhost:3000/fatima/donors/login-donor';
+      } else if (selectedValue === 'Recipient') {
+        endpoint = 'http://localhost:3000/fatima/donors/signup-donor';
+      } else {
+       
+        return;
+      }
+
+      const response = await axios.post(endpoint, {
+        username,
+        password
+      });
+
+      console.log('Login response:', response.data);
+      // Redirect or set state based on response
+    } catch (error) {
+      console.error('Error logging in:', error);
+      // Handle error (e.g., display error message)
+    }
   };
         
   return (
@@ -40,7 +62,7 @@ const LoginForm = () => {
         <option value="">Who are you?</option>
         <option value="Rider">Rider</option>
         <option value="Donor">Donor</option>
-        <option value="Organization">Organization</option>
+        <option value="Recipien">Organization</option>
       </select>
     <div className='login-input'>
         <img src={user_icon} alt="person" />

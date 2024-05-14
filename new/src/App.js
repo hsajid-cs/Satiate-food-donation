@@ -15,6 +15,26 @@ import DashboardRider from './components/DashboardRider';
 import DashboardRecipient from './components/DashboardRecipient';
 import DashboardDonor from './components/DashboardDonor';
 
+const exampleData = [
+  {
+    donorName: "John Doe",
+    location: "New York",
+    description: "A generous donation of assorted food items.",
+    image: "https://source.unsplash.com/random/1",
+    servingSize: "Assorted",
+    expiryDate: "30/06/2024",
+  },
+  {
+    donorName: "Jane Smith",
+    location: "Los Angeles",
+    description: "Freshly baked bread and pastries.",
+    image: "https://source.unsplash.com/random/2",
+    servingSize: "Varies",
+    expiryDate: "Not Applicable",
+  },
+];
+
+
 function App() {
   return (
     <>
@@ -43,7 +63,7 @@ function App() {
       <Route path='/FAQ' element={<FAQ />} />
       <Route path="/login" element={<LoginForm />} />
       <Route path="/dashboard-donor" element={<DashboardDonor numCards={3} />} />
-      <Route path="/dashboard-recipient" element={<DashboardRecipient numCards={2} />} />
+      <Route path="/dashboard-recipient" element={<DashboardRecipient data={exampleData} numCards={2} />} />
       <Route path="/dashboard-rider" element={<DashboardRider numCards={3} />} />
       </Routes>
     </Router>
