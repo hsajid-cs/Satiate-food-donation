@@ -11,12 +11,13 @@ import Typography from '@mui/material/Typography';
  import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
+
 const CardContainer = styled('div')({
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
   gap: '20px',
   maxWidth: '1200px',
-  margin: '0 auto',
+  margin: '0 auto', 
 });
 
 const ExpandMore = styled((props) => {
@@ -30,12 +31,23 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const DonorCard = () => {
-  const [expanded, setExpanded] = React.useState(false);
+const DonorCard = () => 
+  // {
+//   const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+//   const handleExpandClick = () => {
+//     setExpanded(!expanded);
+//   };
+{
+    const [expanded, setExpanded] = React.useState([]);
+  
+    const handleExpandClick = (index) => {
+      setExpanded((prevState) => ({
+        ...prevState,
+        [index]: !prevState[index],
+      }));
+    };
+  
 
   return (
     <CardContainer>
@@ -47,6 +59,7 @@ const DonorCard = () => {
             borderRadius: '8px',
             boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
             width: '100%',
+            height: 'min-content',
           }}
         >
           <CardHeader
@@ -66,16 +79,16 @@ const DonorCard = () => {
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
-            <ExpandMore
-              expand={expanded}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
+          <ExpandMore
+              expand={expanded[index]}
+              onClick={() => handleExpandClick(index)}
+              aria-expanded={expanded[index]}
               aria-label="show more"
             >
               <ExpandMoreIcon />
             </ExpandMore>
           </CardActions>
-          <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <Collapse in={expanded[index]} timeout="auto" unmountOnExit>
             <CardContent>
               <Typography paragraph>Details:</Typography>
               <Typography paragraph>
