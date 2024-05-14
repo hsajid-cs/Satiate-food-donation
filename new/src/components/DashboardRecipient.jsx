@@ -40,7 +40,7 @@ const DashboardRecipient = ({ numCards }) => {
     }));
   };
 
-  const cardWidth = numCards <= 2 ? '40%' : 'calc(70% - 10px)'; // Adjust width based on the number of cards
+  const cardWidth = numCards <= 2 ? '40%' : 'calc(70% - 5px)'; // Adjust width based on the number of cards
 
   return (
     <>
@@ -53,6 +53,7 @@ const DashboardRecipient = ({ numCards }) => {
             borderRadius: '8px',
             boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
             width: cardWidth, // Dynamically set width
+            height: 'min-content',
           }}
         >
           <CardHeader

@@ -30,8 +30,8 @@ export default function ListFood() {
 
   return (
     <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        List Food
+      <Button  onClick={handleClickOpen}>
+       Donate Now
       </Button>
       <Dialog
         open={open}

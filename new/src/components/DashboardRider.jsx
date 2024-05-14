@@ -52,6 +52,7 @@ const DashboardRider = ({ numCards }) => {
             borderRadius: '8px',
             boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
             width: cardWidth, // Dynamically set width
+            height: 'min-content',
           }}
         >
           <CardHeader
