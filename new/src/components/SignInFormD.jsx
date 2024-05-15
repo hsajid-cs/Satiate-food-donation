@@ -24,7 +24,7 @@ const SignInFormD = () => {
   return (
   <div className='login-container'>
     <div className='header'>
-        <div className='text'>Sign up as Donor</div>
+        <div className='text'>Donor SignUp</div>
         <div className='underline'></div>
     </div>
 <div className='login-inputs'>
