@@ -3,32 +3,40 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
+import { useNavigate } from 'react-router-dom';
+import Image from "./images/modal.jpeg";
 
-export default function ListFood() {
-  const [open, setOpen] = React.useState(false);
+export default function MobileSignUp({ open, handleClose }) {
+  const navigate = useNavigate();
+  // const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
+
+  const handleDonor = () => {
+    handleClose();
+    navigate('/signup-donor');
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleOrg = () => {
+    handleClose();
+    navigate('/signup-organization');
   };
+
 
 
   return (
     <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        List Food
-      </Button>
       <Dialog
         open={open}
         onClose={handleClose}
       >
         <DialogTitle>Register</DialogTitle>
-        <DialogActions>
-        <Button onClick={handleClose}>Donor</Button>
-        <Button onClick={handleClose}>Donor</Button>
+        <img src={Image} alt="Registration Image"/>
+        <DialogActions style={{alignContent:'center'}}>
+        <Button onClick={handleDonor}>Donor</Button>
+        <Button onClick={handleOrg}>Organization</Button>
           <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>

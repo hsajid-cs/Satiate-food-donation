@@ -9,36 +9,37 @@ const Footer=()=>{
 <div className="sb_footer section_padding">
 <div className="sb_footer_links">
     <div className="sb_footer_links_div">   
-    <h4>For business</h4>
-    <a href="/blah"><p>Employer</p></a>
-    <a href="/blah"><p>healthplan</p></a>
-    <a href="/blah"><p></p>Individual</a>
+    <h3>Site Links</h3>
+    <a href="#"><p>About Us</p></a>
+    <a href="#"><p>Directions</p></a>
+    <a href="#"><p>Blog</p></a>
+    <a href="#"><p>FAQ</p></a>
     </div>
     <div className="sb_footer_links_div">   
-    <h4>For business</h4>
-    <a href="/blah"><p>Employer</p></a>
-    <a href="/blah"><p>healthplan</p></a>
-    <a href="blah"><p></p>Individual</a>
+    <h3>For Business</h3>
+    <a href="#"><p>Promotion</p></a>
+    <a href="#"><p>Partner</p></a>
+    <a href="blah"><p></p>Career</a>
     </div>
     <div className="sb_footer_links_div">   
-    <h4>For business</h4>
-    <a href="/blah"><p>Employer</p></a>
-    <a href="/blah"><p>healthplan</p></a>
-    <a href="/blah"><p></p>Individual</a>
+    <h3><pre> </pre></h3>
+    <a href="#"><p>Employer</p></a>
+    <a href="#"><p>healthplan</p></a>
+    <a href="#"><p></p>Individual</a>
     </div>
-    <div className="sb_footer_links_div">   
-    <h4>For business</h4>
-    <a href="/blah"><p>Employer</p></a>
-    <a href="/blah"><p>healthplan</p></a>
-    <a href="/blah"><p></p>Individual</a>
-    </div>
+    {/* <div className="sb_footer_links_div">   
+    <h3><pre> </pre></h3>
+    <a href="#"><p>Employer</p></a>
+    <a href="#"><p>healthplan</p></a>
+    <a href="#"><p></p>Individual</a>
+    </div> */}
     <div className="sb_footer_links_div">
-    <h4>For business</h4>
+    <h3>Contact Us</h3>
     <div className="socialmedia">
-    <p><FontAwesomeIcon icon={faFacebook} /></p>
-    <p><FontAwesomeIcon icon={faTwitter} /></p>
-    <p><FontAwesomeIcon icon={faLinkedin} /></p>
-    <p><FontAwesomeIcon icon={faInstagram} /></p>
+    <a><FontAwesomeIcon icon={faFacebook} /></a>
+    <a><FontAwesomeIcon icon={faTwitter} /></a>
+    <a><FontAwesomeIcon icon={faLinkedin} /></a>
+    <a><FontAwesomeIcon icon={faInstagram} /></a>
     </div>
     </div>
 </div>
@@ -50,10 +51,10 @@ const Footer=()=>{
     </p>
 </div>
 <div className="sb_footer_below_links"> 
-    <a href="/blah"><div><p>Terms and Conditions</p></div></a>
-    <a href="/blah"><div><p>Privacy</p></div></a>
-    <a href="/blah"><div><p>Security</p></div></a>
-    <a href="/blah"><div><p>Cookie Declaration</p></div></a>
+    <a href="#"><div><p>Terms and Conditions</p></div></a>
+    <a href="#"><div><p>Privacy</p></div></a>
+    <a href="#"><div><p>Security</p></div></a>
+    <a href="#"><div><p>Cookie Declaration</p></div></a>
     
     </div>
     </div>

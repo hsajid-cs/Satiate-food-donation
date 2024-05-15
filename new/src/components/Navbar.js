@@ -6,6 +6,7 @@ import { Modal } from './Modal';
 import './Navbar.css';
 import styled from 'styled-components';
 import { GlobalStyle } from './GlobalStyle';
+import MobileSignUp from './MobileSignUp';
 
 const PositionedModal = styled.div`
   position: fixed; 
@@ -27,6 +28,7 @@ const Overlay = styled.div`
 
 function Navbar() {
 
+  const [showSignUpDialog, setShowSignUpDialog] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [click, setClick] = useState(false);
   const [button1, setButton1] = useState(true);
@@ -39,13 +41,20 @@ function Navbar() {
   const navigate = useNavigate();
   const handleLoginClick = (e) => {
     e.preventDefault();
-    navigate('/login');    closeMobileMenu();
+    navigate('/login');    
+    closeMobileMenu();
   }
+
+  const toggleSignUpDialog = () => {
+    closeMobileMenu();
+    setShowSignUpDialog(!showSignUpDialog);
+  };
 
   useEffect(() => {
     // Check if user is logged in (You should replace this with your actual authentication logic)
-    const userIsLoggedIn = false;
+    const userIsLoggedIn = !false;
     setIsLoggedIn(userIsLoggedIn);
+    
   }, []);
   const openModal = () => {
     setShowModal(prev => !prev);
@@ -91,9 +100,10 @@ function Navbar() {
             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
             {window.innerWidth <= 960 && (
                 <li className="nav-item mobile-only">
-                  <Link to="/" className="nav-links" onClick={closeMobileMenu}>
+                  <div className="nav-links" onClick={() => { toggleSignUpDialog(); }}>
                     Sign Up  
-                  </Link>
+                    {/* I want the dialog to show up when i click this */}
+                  </div>
                 </li>
               )
             }
@@ -125,18 +135,19 @@ function Navbar() {
               </li>
 
             </ul>
-            <div className="btn-wrapper">
+            
+            
             {isLoggedIn ? (
-              <>
+              <div className='user-links-container'>
                   <Link to="/notifications" className='user-links'>
                     <i className="fas fa-bell" />
                   </Link>
                   <Link to="/profile" className='user-links'>
                     <i className="fas fa-user"  />
                   </Link>
-              </>
+              </div>
             ) : (
-              <><Link to='/' onClick={handleLoginClick}> 
+              <div className="btn-wrapper"><Link to='/' onClick={handleLoginClick}> 
               {window.innerWidth >= 960 && button1 && <Button buttonStyle='btn--outline' >Log In</Button>} 
               </Link>
  
@@ -145,11 +156,12 @@ function Navbar() {
                   Sign Up
                 </Button>
               }
-                </>)}
+              </div>
+                )}
               
             </div>
-        </div>
     </nav>
+    
     {showModal && (
         <>
         <Overlay onClick={closeModal} />
@@ -159,7 +171,7 @@ function Navbar() {
             </PositionedModal>
         </>
     )}
-      
+<MobileSignUp open={showSignUpDialog} handleClose={() => setShowSignUpDialog(false)} />
     </>
   )
 };
