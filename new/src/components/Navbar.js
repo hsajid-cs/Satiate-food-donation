@@ -6,7 +6,6 @@ import { Modal } from './Modal';
 import './Navbar.css';
 import styled from 'styled-components';
 import { GlobalStyle } from './GlobalStyle';
-import MobileSignUp from './MobileSignUp';
 
 const PositionedModal = styled.div`
   position: fixed; 
@@ -28,7 +27,6 @@ const Overlay = styled.div`
 
 function Navbar() {
 
-  const [showSignUpDialog, setShowSignUpDialog] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [click, setClick] = useState(false);
   const [button1, setButton1] = useState(true);
@@ -45,10 +43,6 @@ function Navbar() {
     closeMobileMenu();
   }
 
-  const toggleSignUpDialog = () => {
-    closeMobileMenu();
-    setShowSignUpDialog(!showSignUpDialog);
-  };
 
   useEffect(() => {
     // Check if user is logged in (You should replace this with your actual authentication logic)
@@ -63,6 +57,11 @@ function Navbar() {
       setShowModal(false);
   };
 
+  const handleSignupLinkClick = (e) => {
+    closeMobileMenu();
+    e.preventDefault();
+    openModal();
+  }
   const handleSignupClick = (e) => {
     e.preventDefault();
     openModal();
@@ -100,9 +99,8 @@ function Navbar() {
             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
             {!isLoggedIn && window.innerWidth <= 960 && (
                 <li className="nav-item mobile-only">
-                  <div className="nav-links" onClick={() => { toggleSignUpDialog(); }}>
+                  <div className="nav-links" onClick={handleSignupLinkClick}>
                     Sign Up  
-                    {/* I want the dialog to show up when i click this */}
                   </div>
                 </li>
               )
@@ -179,7 +177,6 @@ function Navbar() {
             </PositionedModal>
         </>
     )}
-<MobileSignUp open={showSignUpDialog} handleClose={() => setShowSignUpDialog(false)} />
     </>
   )
 };
