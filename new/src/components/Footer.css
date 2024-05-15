@@ -33,11 +33,11 @@ a{
     color: rgb(175,175,179);
     text-decoration: none;
 }
-.socialmedia{
+.socialMedia{
     display: flex;
     flex-direction: row;
 }
-/* .socialmedia_icon{
+/* .socialMedia_icon{
     margin: 1rem;
     color: white;
 } */

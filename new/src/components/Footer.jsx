@@ -34,7 +34,7 @@ const Footer=()=>{
     </div>
     <div className="sb_footer_links_div">
     <h4>For business</h4>
-    <div className="socialmedia">
+    <div className="socialMedia">
     <p><FontAwesomeIcon icon={faFacebook} /></p>
     <p><FontAwesomeIcon icon={faTwitter} /></p>
     <p><FontAwesomeIcon icon={faLinkedin} /></p>
