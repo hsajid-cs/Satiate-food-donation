@@ -18,14 +18,21 @@ const Background = styled.div`
 
 const ModalWrapper = styled.div`
   width: 800px;
-  height: 500px;
-  @media (max-width: 768px) {
-    width: 100%; 
-    height: 300px;
+  height: 450px;
+  @media screen and (max-width: 960px) {
+    height: 320px;
+    width: 100%;
+    // height: auto;
+  }
+  @media screen and (max-width: 460px) {
+    width: 300px;
+    height: 290px;
   }
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: #fff;
   color: #000;
+  display:flex;
+
   display: grid;
   grid-template-columns: 1fr 1fr;
   z-index: 10;
@@ -34,20 +41,20 @@ const ModalWrapper = styled.div`
 `;
 
 const ModalImg = styled.img`
-  width: 100%;
+  max-width: 100%;
   height: 100%;
-
-
-
   object-fit: cover;
   border-radius: 10px 0 0 10px;
   background: #000;
+  @media screen and (max-width:960px){
+    display: none;
+  }
+  
 `;
 
 const ModalContent = styled.div`
-display: flex;
-  flex-wrap: wrap;
-
+display: column;
+  flex-direction: column;
   button {
     
     background: #1ea27e;
@@ -57,6 +64,24 @@ display: flex;
 
   }
 
+  h2{
+    margin-top:5rem;
+    text-align: center;
+  }
+  p{
+    margin-top: 3rem;
+    text-align: center;
+    margin-right: 1.5rem;
+    margin-left:1.5rem;
+    
+  }
+
+  .mobile{
+    display:none;
+  }
+  div{
+    margin-top: 1.5rem;
+  }
   button + button {
     margin-left: 10px;
   }
@@ -67,9 +92,39 @@ display: flex;
   color: #141414;
   
 
-  @media (max-width: 768px) {
-    // line-height: 3.0;
+  @media screen and (max-width: 960px) {
+
     margin-top: 25px;
+    h2{
+      margin-right: 0;
+      font-size: 20px;
+      margin-top: 1rem;
+    }
+    p{
+      margin-top: 1rem;
+    }
+    div{
+      margin-top:0.25rem;
+    }
+  }
+  @media screen and (max-width: 460px) {
+    width: 300px;
+    h2{
+      margin-top: 1.75rem;
+    }
+    .desktop{
+      display:none;
+    }
+    .mobile{
+      display: block;
+      
+        margin-top:1.5rem;
+      
+
+    }
+    div{
+      margin-top:0.75rem;
+    }
   }
 
 `;
@@ -131,9 +186,10 @@ export const Modal = ({ showModal, setShowModal }) => {
             <ModalWrapper showModal={showModal}>
               <ModalImg src={require('./images/modal.jpeg')} alt='camera' />
               <ModalContent>
-                <h1>Ready to make impact?</h1>
-                <p>Help us turn excess into access for those in need</p>
-                <div className='submit-container'>
+                <h2>Ready to make an impact?</h2>
+                <p className='desktop'>Too many in the world suffer from hunger and lack access to education. By 2050, 10 billion people presents challenges if trends continue. Hundreds of millions of children miss school each year due to poverty and hunger. Over half of Pakistan struggles with food insecurity. Together we can address these issues and improve lives through food and learning.</p>
+                <p className='mobile'>Too many in the world suffer from hunger and lack access to education. By 2050, 10 billion people presents challenges if trends continue. </p>
+                <div className='modal-container'>
                 <div className="submit-modal" onClick={() => handleClick('/signup-organization')}>
     Register
   </div>
