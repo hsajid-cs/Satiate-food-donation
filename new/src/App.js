@@ -15,6 +15,7 @@ import FAQ from './components/FAQ';
 import DashboardRider from './components/DashboardRider';
 import DashboardRecipient from './components/DashboardRecipient';
 import DashboardDonor from './components/DashboardDonor';
+import MobileSignUp from './components/MobileSignUp';
 
 const exampleData = [
   {
@@ -22,7 +23,7 @@ const exampleData = [
     location: "New York",
     description: "A generous donation of assorted food items.",
     image: "https://source.unsplash.com/random/1",
-    servingSize: "Assorted",
+    servingSize: 30,
     expiryDate: "30/06/2024",
   },
   {
@@ -30,8 +31,8 @@ const exampleData = [
     location: "Los Angeles",
     description: "Freshly baked bread and pastries.",
     image: "https://source.unsplash.com/random/2",
-    servingSize: "Varies",
-    expiryDate: "Not Applicable",
+    servingSize: 10,
+    expiryDate: "30/06/2024",
   },
 ];
 
@@ -42,6 +43,7 @@ function App() {
     <Router>
  
      <Navbar />
+     <MobileSignUp />
 
     {/* //  <DonorCard/> */}
      {/* <Box
@@ -55,7 +57,7 @@ function App() {
 </Box>
     */}
 
-
+<body>
       <Routes>
       <Route path='/' exact />
       <Route path="/stories" element={<Stories/>} />
@@ -68,7 +70,9 @@ function App() {
       <Route path="/dashboard-rider" element={<DashboardRider numCards={3} />} />
      
       </Routes>
-      <Footer /> 
+      </body>
+<Footer />
+      
     </Router>
     </>
   );
