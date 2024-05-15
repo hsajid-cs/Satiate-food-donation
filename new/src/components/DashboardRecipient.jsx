@@ -9,8 +9,8 @@ import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import AssignRider from './AssignRider';
 
-// import UserTable from './UserTable';
 const CardContainer = styled('div')({
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
@@ -30,7 +30,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const DashboardRecipient = ({ numCards }) => {
+const DashboardRecipient = ({ data, numCards }) => {
   const [expanded, setExpanded] = React.useState({});
 
   const handleExpandClick = (index) => {
@@ -42,10 +42,16 @@ const DashboardRecipient = ({ numCards }) => {
 
   const cardWidth = numCards <= 2 ? '40%' : 'calc(70% - 5px)'; // Adjust width based on the number of cards
 
+
+  const handleAssignRider = (index) => {
+    // Logic to assign rider to the card with the specified index
+    console.log(`Assigning rider to card ${index}`);
+  };
+
   return (
     <>
-    <CardContainer>
-      {Array.from({ length: numCards }).map((_, index) => (
+     <CardContainer>
+    {data.map((item, index) => (
         <Card
           key={index}
           sx={{
@@ -57,21 +63,23 @@ const DashboardRecipient = ({ numCards }) => {
           }}
         >
           <CardHeader
-            title="Donor Name"
-            subheader="Location"
+            title={item.donorName}
+            subheader={item.location}
           />
           <CardMedia
             component="img"
             height="194"
-            image="https://source.unsplash.com/random"
-            alt="random"
+            image={item.image}
+            alt={item.donorName}
           />
+  
           <CardContent>
             <Typography variant="body2" color="text.secondary">
-              Description
+              {item.description}
             </Typography>
           </CardContent>
-          <CardActions disableSpacing>
+          <CardActions disableSpacing>   
+          <AssignRider onClickAssign={handleAssignRider} index={index} />
             <ExpandMore
               expand={expanded[index]}
               onClick={() => handleExpandClick(index)}
@@ -85,15 +93,14 @@ const DashboardRecipient = ({ numCards }) => {
             <CardContent>
               <Typography paragraph>Details:</Typography>
               <Typography paragraph>
-                Blah blah blah
+                Expiry date: {item.expiryDate}<br/>
+                Serving Size: {item.servingSize}
               </Typography>
             </CardContent>
           </Collapse>
         </Card>
-        
       ))}
     </CardContainer>
-   {/* <UserTable/> */}
    </>
   );
 };
