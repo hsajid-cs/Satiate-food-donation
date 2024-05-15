@@ -30,7 +30,7 @@
     flex-direction: column;
     margin: 1rem;
     justify-content: flex-start;
-    width: 150px;
+    width: 250px;
     color: white;
 }
 .sb_footer_links_div a p{
@@ -38,14 +38,36 @@
     color: white;
     text-decoration: none;
 }
-.socialmedia{
+.socialMedia{
     display: flex;
     flex-direction: row;
     
 }
-.socialmedia a{
+.socialMedia_icon {
+    margin: 1rem;
+    display: inline-block;
+   
+}
+
+.socialMedia_icon svg {
+    font-size: 2rem;        
+    color: #555;          
+    transition: color 0.3s; 
+}
+
+.socialMedia_icon svg:hover {
+    color: #1a4632;     
+}
+
+
+ .socialMedia_icon{
+    margin: 1rem;
+}
+
+.socialMedia a{
     height: 20px;
     margin-right: 5px;
+
     color: white;
     cursor: pointer;
 }
