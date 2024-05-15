@@ -15,7 +15,6 @@ import FAQ from './components/FAQ';
 import DashboardRider from './components/DashboardRider';
 import DashboardRecipient from './components/DashboardRecipient';
 import DashboardDonor from './components/DashboardDonor';
-import MobileSignUp from './components/MobileSignUp';
 
 const exampleData = [
   {
@@ -43,7 +42,6 @@ function App() {
     <Router>
  
      <Navbar />
-     <MobileSignUp />
 
     {/* //  <DonorCard/> */}
      {/* <Box
