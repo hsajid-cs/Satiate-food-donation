@@ -20,8 +20,8 @@ const ModalWrapper = styled.div`
   width: 800px;
   height: 500px;
   @media (max-width: 768px) {
-    width: 90%; 
-    height: 80%;
+    width: 100%; 
+    height: 300px;
   }
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: #fff;
@@ -63,9 +63,14 @@ display: flex;
   
   justify-content: center;
   align-items: center;
-  line-height: 1.8;
+  // line-height: 2.0;
   color: #141414;
+  
 
+  @media (max-width: 768px) {
+    // line-height: 3.0;
+    margin-top: 25px;
+  }
 
 `;
 
@@ -77,6 +82,7 @@ const CloseModalButton = styled(MdClose)`
   width: 32px;
   height: 32px;
   padding: 0;
+  margin: 0;
   z-index: 10;
 `;
 
@@ -97,11 +103,6 @@ export const Modal = ({ showModal, setShowModal }) => {
     transform: showModal ? `translateY(0%)` : `translateY(-100%)`
   });
 
-  // const closeModal = e => {
-  //   if (modalRef.current === e.target) {
-  //     setShowModal(false);
-  //   }
-  // };
 
   const keyPress = useCallback(
     e => {
@@ -134,11 +135,11 @@ export const Modal = ({ showModal, setShowModal }) => {
                 <p>Help us turn excess into access for those in need</p>
                 <div className='submit-container'>
                 <div className="submit-modal" onClick={() => handleClick('/signup-organization')}>
-    Register Organization 
+    Register
   </div>
 
   <div className="submit-modal" onClick={() => handleClick('/signup-donor')}>
-   Donate Food
+   Donate
   </div>
                 </div>
               </ModalContent>

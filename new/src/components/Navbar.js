@@ -52,7 +52,7 @@ function Navbar() {
 
   useEffect(() => {
     // Check if user is logged in (You should replace this with your actual authentication logic)
-    const userIsLoggedIn = !false;
+    const userIsLoggedIn = false;
     setIsLoggedIn(userIsLoggedIn);
     
   }, []);
@@ -98,7 +98,7 @@ function Navbar() {
             </div>
             
             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-            {window.innerWidth <= 960 && (
+            {!isLoggedIn && window.innerWidth <= 960 && (
                 <li className="nav-item mobile-only">
                   <div className="nav-links" onClick={() => { toggleSignUpDialog(); }}>
                     Sign Up  
@@ -108,10 +108,18 @@ function Navbar() {
               )
             }
 
-            {window.innerWidth <= 960 && (
+            {!isLoggedIn && window.innerWidth <= 960 && (
                 <li className="nav-item mobile-only">
                   <Link to="/login" className="nav-links" onClick={closeMobileMenu}>
                      Log In
+                  </Link>
+                </li>
+              )
+            }
+            {isLoggedIn && window.innerWidth <= 960 && (
+                <li className="nav-item mobile-only">
+                  <Link to="/" className="nav-links" onClick={closeMobileMenu}>
+                     Log Out
                   </Link>
                 </li>
               )
