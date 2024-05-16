@@ -3,7 +3,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import SignInFormD from './components/SignInFormD';
 import SignInFormO from './components/SignInFormO';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import Stories from './components/Stories';
 // import ListFood from './components/ListFood';
@@ -15,6 +15,7 @@ import FAQ from './components/FAQ';
 import DashboardRider from './components/DashboardRider';
 import DashboardRecipient from './components/DashboardRecipient';
 import DashboardDonor from './components/DashboardDonor';
+import { Home } from './components/Home';
 
 const exampleData = [
   {
@@ -57,7 +58,8 @@ function App() {
 
 <body>
       <Routes>
-      <Route path='/' exact />
+      <Route path='/' element={<Navigate to="/home" />} />
+      <Route path='/home' element={<Home/>}/>
       <Route path="/stories" element={<Stories/>} />
       <Route path="/signup-organization" element={<SignInFormO />} />
       <Route path="/signup-donor" element={<SignInFormD />} />

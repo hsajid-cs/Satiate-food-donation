@@ -89,7 +89,7 @@ function Navbar() {
     <>
     <nav className='navbar'>
         <div className='navbar-container'>
-        <Link to='/' className='navbar-logo'>
+        <Link to='/home' className='navbar-logo'>
           Satiate <i className='fa-solid fa-bowl-food' />
           </Link>
             <div className='menu-icon' onClick={handleClick}>
