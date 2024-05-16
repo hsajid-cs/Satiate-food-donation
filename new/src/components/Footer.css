@@ -3,8 +3,8 @@
 }
 .footer{
     background-color: #1ea27e;
-    /* position: absolute; */
-    /* bottom: 0; */
+    /* position: absolute;  */
+     /* bottom: 0;  */
 
    
 }
@@ -16,7 +16,7 @@
 .sb_footer_links{
     display: flex;
     flex-direction: row;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     justify-content: space-between;
     align-items: flex-start;
     flex-wrap: wrap;
