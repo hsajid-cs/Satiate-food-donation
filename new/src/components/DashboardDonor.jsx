@@ -14,6 +14,9 @@ import UserTable from './UserTable';
 import ListFood from './ListFood';
 import Button from '@mui/material/Button';
 import "./Button.css";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+
 const CardContainer = styled(Box)(({ numCards }) => ({
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
@@ -38,8 +41,8 @@ const DashboardDonor = ({ numCards }) => {
 
   return (
     <>
-    <Button class="submit"> 
-    <ListFood /> 
+    <Button class="btn-primary"> 
+    <div className="btn-outline"><ListFood /> </div>
     </Button>
     
       <CardContainer numCards={numCards}>
