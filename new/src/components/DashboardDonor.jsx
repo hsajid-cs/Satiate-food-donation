@@ -14,8 +14,9 @@ import UserTable from './UserTable';
 import ListFood from './ListFood';
 import Button from '@mui/material/Button';
 import "./Button.css";
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
+import "./Dashboard.css"
+// import "slick-carousel/slick/slick.css"; 
+// import "slick-carousel/slick/slick-theme.css";
 
 const CardContainer = styled(Box)(({ numCards }) => ({
   display: 'grid',
@@ -41,30 +42,12 @@ const DashboardDonor = ({ numCards }) => {
 
   return (
     <>
-    <Button 
-        style={{
-          display : 'flex',
-          flexDirection: 'row',
-          fontSize: '1.5rem', // Adjust the font size as needed
-          padding: '0.75rem 1.5rem', // Optional: adjust padding to match the larger font size
-          backgroundColor: '#f5f5f5  ' , // Example background color
-          color: 'black', // Change text color to black
-          border: 'none',
-          borderRadius: '4px',
-          cursor: 'pointer',
-          // display: 'inline-block',
-          textAlign: 'center',
-          // margin: '0 auto',
-          marginBottom: '1rem', // Optional: add some space below the button
-        }}
-      > 
-        <div style={{ display: 'inline-block' }}>
-          <ListFood /> 
-        </div>
-      </Button>
-
+    <div className="user-action">
+      <div className="list-action"><ListFood className="action-btn" /></div>
     
-      <CardContainer numCards={numCards}>
+    </div>
+    <div className="cards">
+    <CardContainer numCards={numCards}>
         {Array.from({ length: numCards }).map((_, index) => (
           <Card
             key={index}
@@ -80,7 +63,7 @@ const DashboardDonor = ({ numCards }) => {
             <CardMedia
               component="img"
               height="194"
-              image="https://source.unsplash.com/random"
+              image="https://source.unsplash.com/random/{index}"
               alt="random"
             />
             <CardContent>
@@ -106,7 +89,31 @@ const DashboardDonor = ({ numCards }) => {
           </Card>
         ))}
       </CardContainer>
-      <UserTable />
+    </div>
+    <div className="user-table">
+    <UserTable />
+    </div>
+    {/* <Button 
+        style={{
+          display : 'flex',
+          flexDirection: 'row',
+          fontSize: '1.5rem', // Adjust the font size as needed
+          padding: '0.75rem 1.5rem', // Optional: adjust padding to match the larger font size
+          backgroundColor: '#f5f5f5  ' , // Example background color
+          color: 'black', // Change text color to black
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer',
+          // display: 'inline-block',
+          textAlign: 'center',
+          // margin: '0 auto',
+          marginBottom: '1rem', // Optional: add some space below the button
+        }}
+      > 
+        <div style={{ display: 'inline-block' }}>
+          <ListFood /> 
+        </div>
+      </Button> */}
     </>
   );
 };

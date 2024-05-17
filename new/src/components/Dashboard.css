@@ -1,0 +1,25 @@
+.user-action{
+    position: relative;
+    height: 80px;
+    background-color: aquamarine;
+    margin-left: 3rem;
+    margin-bottom: 1rem;
+}
+
+.list-action{ display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 180px;
+    height: 70px;
+    color: #fff;
+    background: #1ea27e ;
+    border-radius: 50px;
+    font-size: 19px;
+    font-weight: 700;
+    cursor: pointer;}
+.action-btn{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+}
