@@ -43,7 +43,16 @@ const DashboardDonor = ({ numCards }) => {
   return (
     <>
     <div className="user-action">
-      <div className="list-action"><ListFood className="action-btn" /></div>
+      <div className='user-info'>
+        <img src="https://pluspng.com/img-png/user-png-icon-big-image-png-2240.png" alt="user" className='user-avatar' />
+        <div className="user-name">
+        <h2>UserName</h2>
+        <h3>Location</h3>
+        </div>
+      </div>
+      <div className="list-action">
+        <ListFood className="action-btn" />
+      </div>
     
     </div>
     <div className="cards">
