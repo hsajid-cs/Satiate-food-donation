@@ -5,9 +5,10 @@
   font-family: 'PT Sans', sans-serif;
 }
 
-/* body{
-  background-color: #0e7f66;
-} */
+body{
+  /* background-color: #0e7f66; */
+  margin-bottom: 30px;
+}
 
 .home,
 .services,

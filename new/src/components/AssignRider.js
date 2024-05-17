@@ -6,7 +6,6 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import MenuItem from '@mui/material/MenuItem';
-// import { colors } from '@mui/material';
 
 const fetchRiders = async () => {
   // Implement your MongoDB fetch logic here
@@ -39,7 +38,7 @@ const fetchRiderDetails = async (riderId) => {
 };
 
 // Initialize endWork with the same values as startWork
-export default function AssignRider() {
+const AssignRider= ({ onClickAssign, index }) => {
   const [open, setOpen] = React.useState(false);
   const [riders, setRiders] = useState([]);
   const [selectedRider, setSelectedRider] = useState('');
@@ -50,6 +49,10 @@ export default function AssignRider() {
     startWork: '',
     endWork: '',
   });
+  const handleClick = () => {
+    setOpen(true);
+    onClickAssign(index);
+  };
 
   useEffect(() => {
     const fetchRidersData = async () => {
@@ -59,10 +62,6 @@ export default function AssignRider() {
 
     fetchRidersData();
   }, []);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
 
   const handleClose = () => {
     setOpen(false);
@@ -77,7 +76,7 @@ export default function AssignRider() {
 
   return (
     <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen} style={{color: 'black'}}>
+      <Button variant="outlined" onClick={handleClick} style={{color: 'black'}}>
         Assign Carrier
       </Button>
       <Dialog
@@ -180,3 +179,5 @@ export default function AssignRider() {
     </React.Fragment>
   );
 }
+
+export default AssignRider;

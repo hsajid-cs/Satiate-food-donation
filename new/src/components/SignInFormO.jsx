@@ -1,13 +1,20 @@
-import React, {/*{useState}*/} from 'react';
+import React from 'react';
 import "./SignInFormD.css";
 import { Link } from 'react-router-dom';
-
 import user_icon from "./images/loginsignup/person.png"
 import email_icon from "./images/loginsignup/email.png"
 import password_icon from "./images/loginsignup/password.png"
 import location_icon from "./images/loginsignup/loc.png"
+import contact_icon from "./images/loginsignup/contact.png"
 
 const SignInFormO = () => {
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition((position) => {
+            console.log(position.coords.latitude);
+            console.log(position.coords.longitude);
+        })
+    }
+
   return (
   <div className='login-container'>
     <div className='header'>
@@ -20,12 +27,16 @@ const SignInFormO = () => {
         <input type='text' placeholder='Username'></input>
     </div>
     <div className='login-input'>
+        <img src={contact_icon} alt="Telephone" />
+        <input type='text' placeholder='Phone Number'></input>
+    </div>
+    <div className='login-input'>
         <img src={email_icon} alt="Envelope" />
         <input type='email' placeholder='Email'></input>
     </div>
     <div className='login-input'>
         <img src={location_icon} alt="location" />
-        <input type='text' placeholder='Location'></input>
+        <input type='text' placeholder='Address'></input>
     </div>
     <div className='login-input'>
         <img src={password_icon} alt="Password" />

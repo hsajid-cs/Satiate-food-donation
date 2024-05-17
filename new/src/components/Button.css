@@ -42,4 +42,19 @@
     /*transition: 250ms;*/
   }
 
-  
+  /* .submit{
+    outline: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 220px;
+    height: 50px;
+    color: #fff;
+    background: #1ea27e ;
+    border-radius: 50px;
+    font-size: 19px;
+    font-weight: 700;
+    cursor: pointer;
+
+} */

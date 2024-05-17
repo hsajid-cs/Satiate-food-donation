@@ -39,14 +39,21 @@ function Navbar() {
   const navigate = useNavigate();
   const handleLoginClick = (e) => {
     e.preventDefault();
-    navigate('/login');
+    navigate('/login');    
     closeMobileMenu();
   }
+
 
   useEffect(() => {
     // Check if user is logged in (You should replace this with your actual authentication logic)
     const userIsLoggedIn = !false;
     setIsLoggedIn(userIsLoggedIn);
+
+  useEffect(() => {
+    // Check if user is logged in (You should replace this with your actual authentication logic)
+    const userIsLoggedIn = false;
+    setIsLoggedIn(userIsLoggedIn);
+    
   }, []);
   const openModal = () => {
     setShowModal(prev => !prev);
@@ -55,6 +62,11 @@ function Navbar() {
       setShowModal(false);
   };
 
+  const handleSignupLinkClick = (e) => {
+    closeMobileMenu();
+    e.preventDefault();
+    openModal();
+  }
   const handleSignupClick = (e) => {
     e.preventDefault();
     openModal();
@@ -82,7 +94,7 @@ function Navbar() {
     <>
     <nav className='navbar'>
         <div className='navbar-container'>
-        <Link to='/' className='navbar-logo'>
+        <Link to='/home' className='navbar-logo'>
           Satiate <i className='fa-solid fa-bowl-food' />
           </Link>
             <div className='menu-icon' onClick={handleClick}>
@@ -90,16 +102,28 @@ function Navbar() {
             </div>
             
             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+<<<<<<< HEAD
             {window.innerWidth <= 960 && (
                 <li className="nav-item mobile-only">
                   <Link to="/" className="nav-links" onClick={closeMobileMenu}>
                     Sign Up  
                   </Link>
+=======
+            {!isLoggedIn && window.innerWidth <= 960 && (
+                <li className="nav-item mobile-only">
+                  <div className="nav-links" onClick={handleSignupLinkClick}>
+                    Sign Up  
+                  </div>
+>>>>>>> 23e31c0755d90e4cbfb2b85bbc3b190a31a4e929
                 </li>
               )
             }
 
+<<<<<<< HEAD
             {window.innerWidth <= 960 && (
+=======
+            {!isLoggedIn && window.innerWidth <= 960 && (
+>>>>>>> 23e31c0755d90e4cbfb2b85bbc3b190a31a4e929
                 <li className="nav-item mobile-only">
                   <Link to="/login" className="nav-links" onClick={closeMobileMenu}>
                      Log In
@@ -107,6 +131,17 @@ function Navbar() {
                 </li>
               )
             }
+<<<<<<< HEAD
+=======
+            {isLoggedIn && window.innerWidth <= 960 && (
+                <li className="nav-item mobile-only">
+                  <Link to="/" className="nav-links" onClick={closeMobileMenu}>
+                     Log Out
+                  </Link>
+                </li>
+              )
+            }
+>>>>>>> 23e31c0755d90e4cbfb2b85bbc3b190a31a4e929
               <li className='nav-item'>
                 <Link to='/stories' className='nav-links' onClick={closeMobileMenu}>
                   Stories
@@ -126,18 +161,31 @@ function Navbar() {
               </li>
 
             </ul>
+<<<<<<< HEAD
             <div className="btn-wrapper">
             {isLoggedIn ? (
               <>
+=======
+            
+            
+            {isLoggedIn ? (
+              <div className='user-links-container'>
+>>>>>>> 23e31c0755d90e4cbfb2b85bbc3b190a31a4e929
                   <Link to="/notifications" className='user-links'>
                     <i className="fas fa-bell" />
                   </Link>
                   <Link to="/profile" className='user-links'>
                     <i className="fas fa-user"  />
                   </Link>
+<<<<<<< HEAD
               </>
             ) : (
               <><Link to='/' onClick={handleLoginClick}> 
+=======
+              </div>
+            ) : (
+              <div className="btn-wrapper"><Link to='/' onClick={handleLoginClick}> 
+>>>>>>> 23e31c0755d90e4cbfb2b85bbc3b190a31a4e929
               {window.innerWidth >= 960 && button1 && <Button buttonStyle='btn--outline' >Log In</Button>} 
               </Link>
  
@@ -146,11 +194,19 @@ function Navbar() {
                   Sign Up
                 </Button>
               }
+<<<<<<< HEAD
                 </>)}
               
             </div>
         </div>
+=======
+              </div>
+                )}
+              
+            </div>
+>>>>>>> 23e31c0755d90e4cbfb2b85bbc3b190a31a4e929
     </nav>
+    
     {showModal && (
         <>
         <Overlay onClick={closeModal} />
@@ -160,7 +216,6 @@ function Navbar() {
             </PositionedModal>
         </>
     )}
-      
     </>
   )
 };

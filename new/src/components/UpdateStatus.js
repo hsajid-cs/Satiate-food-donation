@@ -52,6 +52,7 @@ export default function UpdateStatus() {
             id="contact"
             name="contact"
             type="number"
+            defaultValue={"Change Status"}
             helperText="Serving Size (Min. 20)"
             fullWidth
             variant="outlined">{status.map((option) => (
