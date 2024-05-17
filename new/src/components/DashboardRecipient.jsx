@@ -40,7 +40,7 @@ const DashboardRecipient = ({ data, numCards }) => {
     }));
   };
 
-  const cardWidth = numCards <= 2 ? '40%' : 'calc(70% - 5px)'; // Adjust width based on the number of cards
+  const cardWidth = numCards <= 2 ? '60%' : 'calc(70% - 5px)'; // Adjust width based on the number of cards
 
 
   const handleAssignRider = (index) => {

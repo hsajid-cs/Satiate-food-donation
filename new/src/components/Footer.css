@@ -1,8 +1,15 @@
-.section_padding{
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body takes the full height of the viewport */
+    margin: 0; /* Remove default margin */
+}.section_padding{
     padding: 4rem 4rem;
 }
 .footer{
     background-color: #1ea27e;
+    margin-top: auto;
     /* position: absolute;  */
      /* bottom: 0;  */
 

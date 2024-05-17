@@ -26,24 +26,43 @@ const CardContainer = styled(Box)(({ numCards }) => ({
   justifyContent: numCards === 1 ? 'center' : 'initial',
 }));
 
-
 const DashboardDonor = ({ numCards }) => {
   const [expanded, setExpanded] = React.useState([]);
 
   const handleExpandClick = (index) => {
-    setExpanded((prevState) => ({
-      ...prevState,
-      [index]: !prevState[index],
-    }));
+    setExpanded((prevState) => {
+      const newState = [...prevState];
+      newState[index] = !newState[index];
+      return newState;
+    });
   };
 
-  const cardWidth = numCards <= 2 ? '40%' : 'calc(70% - 10px)'; // Adjust width based on the number of cards
+  const cardWidth = numCards <= 2 ? '60%' : 'calc(70% - 10px)'; // Adjust width based on the number of cards
 
   return (
     <>
-    <Button class="btn-primary"> 
-    <div className="btn-outline"><ListFood /> </div>
-    </Button>
+    <Button 
+        style={{
+          display : 'flex',
+          flexDirection: 'row',
+          fontSize: '1.5rem', // Adjust the font size as needed
+          padding: '0.75rem 1.5rem', // Optional: adjust padding to match the larger font size
+          backgroundColor: '#f5f5f5  ' , // Example background color
+          color: 'black', // Change text color to black
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer',
+          // display: 'inline-block',
+          textAlign: 'center',
+          // margin: '0 auto',
+          marginBottom: '1rem', // Optional: add some space below the button
+        }}
+      > 
+        <div style={{ display: 'inline-block' }}>
+          <ListFood /> 
+        </div>
+      </Button>
+
     
       <CardContainer numCards={numCards}>
         {Array.from({ length: numCards }).map((_, index) => (
