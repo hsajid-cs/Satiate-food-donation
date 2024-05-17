@@ -56,7 +56,6 @@ function App() {
 </Box>
     */}
 
-<body>
       <Routes>
       <Route path='/' element={<Navigate to="/home" />} />
       <Route path='/home' element={<Home/>}/>
@@ -70,7 +69,6 @@ function App() {
       <Route path="/dashboard-rider" element={<DashboardRider numCards={2} />} />
      
       </Routes>
-      </body>
 <Footer />
       
     </Router>

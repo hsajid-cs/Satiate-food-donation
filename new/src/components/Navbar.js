@@ -46,7 +46,7 @@ function Navbar() {
 
   useEffect(() => {
     // Check if user is logged in (You should replace this with your actual authentication logic)
-    const userIsLoggedIn = false;
+    const userIsLoggedIn = !false;
     setIsLoggedIn(userIsLoggedIn);
     
   }, []);
@@ -114,6 +114,7 @@ function Navbar() {
                 </li>
               )
             }
+
             {isLoggedIn && window.innerWidth <= 960 && (
                 <li className="nav-item mobile-only">
                   <Link to="/" className="nav-links" onClick={closeMobileMenu}>
@@ -144,6 +145,7 @@ function Navbar() {
             
             
             {isLoggedIn ? (
+              <>
               <div className='user-links-container'>
                   <Link to="/notifications" className='user-links'>
                     <i className="fas fa-bell" />
@@ -151,7 +153,16 @@ function Navbar() {
                   <Link to="/profile" className='user-links'>
                     <i className="fas fa-user"  />
                   </Link>
+                  
               </div>
+              <div className='btn-wrapper'>
+              {window.innerWidth >= 960 && button2 && 
+                <Button className="logout-btn" buttonStyle='btn--outline' onClick={handleSignupClick}>
+                  Log Out
+                </Button>
+              }
+              </div>
+              </>
             ) : (
               <div className="btn-wrapper"><Link to='/' onClick={handleLoginClick}> 
               {window.innerWidth >= 960 && button1 && <Button buttonStyle='btn--outline' >Log In</Button>} 

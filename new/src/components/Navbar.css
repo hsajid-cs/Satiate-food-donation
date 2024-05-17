@@ -53,7 +53,7 @@ background: rgba(0,0,0,0.5);
   text-align: center;
   width: 60vw;
   justify-content: end;
-  margin-right: 2rem;
+  margin-right: 0.5rem;
 }
 
 .nav-item {
@@ -74,6 +74,12 @@ background: rgba(0,0,0,0.5);
   cursor: pointer;
 }
 
+.user-links-container {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
 .user-links {
   color: #fff;
   display: flex;
@@ -81,6 +87,7 @@ background: rgba(0,0,0,0.5);
   text-decoration: none;
   padding: 0.5rem 1rem;
   height: 100%;
+
 }
 
 .nav-links:hover {
@@ -215,3 +222,4 @@ background: rgba(0,0,0,0.5);
 .btn-wrapper button {
   margin-right: 10px;
 }
+
