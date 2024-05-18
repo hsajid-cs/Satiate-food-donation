@@ -4,8 +4,10 @@
     margin:auto;
     width: 600px;
     margin-top: 50px;
+    margin-bottom: 50px;
     background: #eff8e2;
     padding-bottom: 30px;
+    border-radius: 10px;
 
 }
 

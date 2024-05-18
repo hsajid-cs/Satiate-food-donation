@@ -9,7 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 export default function ListFood() {
   const [open, setOpen] = React.useState(false);
   const [servingSize, setServingSize] = React.useState(20);
-
+  const [status, setStatus] = React.useState('pending');
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -26,6 +26,16 @@ export default function ListFood() {
       setServingSize(20); // If not greater than 20, set it to 20
     }
   };
+  
+  const handleAddFood = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const formJson = Object.fromEntries(formData.entries());
+    const email = formJson.email;
+    // Assuming some function to update the status, you can replace this with your actual logic
+    setStatus('listed');
+    handleClose();
+  };
 
 
   return (
@@ -38,13 +48,14 @@ export default function ListFood() {
         onClose={handleClose}
         PaperProps={{
           component: 'form',
-          onSubmit: (event) => {
-            event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-            const formJson = Object.fromEntries(formData.entries());
-            const email = formJson.email;
-            handleClose();
-          },
+          onSubmit: handleAddFood
+          // (event) => {
+          //   event.preventDefault();
+          //   const formData = new FormData(event.currentTarget);
+          //   const formJson = Object.fromEntries(formData.entries());
+          //   const email = formJson.email;
+          //   handleClose();
+          // },
         }}
       >
         <DialogTitle>List New Food</DialogTitle>

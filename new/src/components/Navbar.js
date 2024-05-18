@@ -46,7 +46,7 @@ function Navbar() {
 
   useEffect(() => {
     // Check if user is logged in (You should replace this with your actual authentication logic)
-    const userIsLoggedIn = !false;
+    const userIsLoggedIn = localStorage.getItem('token') !== null;
     setIsLoggedIn(userIsLoggedIn);
 
   useEffect(() => {
@@ -85,6 +85,13 @@ function Navbar() {
         item.style.display = 'none';})
     }
   }
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    // Log out logic here
+    setIsLoggedIn(false);
+    navigate('/');
+  };
 
 
 
@@ -134,9 +141,9 @@ function Navbar() {
 =======
             {isLoggedIn && window.innerWidth <= 960 && (
                 <li className="nav-item mobile-only">
-                  <Link to="/" className="nav-links" onClick={closeMobileMenu}>
+                  <div className="nav-links" onClick={handleLogout}>
                      Log Out
-                  </Link>
+                  </div>
                 </li>
               )
             }
@@ -148,7 +155,7 @@ function Navbar() {
               </li>
 
               <li className='nav-item'>
-                <Link to='/dashboard-rider' className='nav-links' onClick={closeMobileMenu}>
+                <Link to='/about-us' className='nav-links' onClick={closeMobileMenu}>
                   About Us
                 </Link>
               </li>
@@ -181,7 +188,7 @@ function Navbar() {
               </div>
               <div className='btn-wrapper'>
               {window.innerWidth >= 960 && button2 && 
-                <Button className="logout-btn" buttonStyle='btn--outline' onClick={handleSignupClick}>
+                <Button className="logout-btn" buttonStyle='btn--outline' onClick={handleLogout}>
                   Log Out
                 </Button>
               }
