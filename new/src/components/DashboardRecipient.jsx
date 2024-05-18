@@ -10,6 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AssignRider from './AssignRider';
+import './Dashboard.css'
 
 const CardContainer = styled('div')({
   display: 'grid',
@@ -40,7 +41,7 @@ const DashboardRecipient = ({ data, numCards }) => {
     }));
   };
 
-  const cardWidth = numCards <= 2 ? '60%' : 'calc(70% - 5px)'; // Adjust width based on the number of cards
+  // const cardWidth = numCards <= 2 ? '60%' : 'calc(70% - 5px)'; // Adjust width based on the number of cards
 
 
   const handleAssignRider = (index) => {
@@ -50,6 +51,19 @@ const DashboardRecipient = ({ data, numCards }) => {
 
   return (
     <>
+    <div className="user-action">
+      <div className='user-info'>
+        <img src="https://pluspng.com/img-png/user-png-icon-big-image-png-2240.png" alt="user" className='user-avatar' />
+        <div className="user-name">
+        <h2>UserName</h2>
+        <h3>Location</h3>
+        </div>
+        </div>
+      </div>
+      {/* <div className="list-action">
+        <ListFood className="action-btn" />
+      </div> */}
+    <div className="cards">
      <CardContainer>
     {data.map((item, index) => (
         <Card
@@ -58,7 +72,7 @@ const DashboardRecipient = ({ data, numCards }) => {
             backgroundColor: '#f5f5f5',
             borderRadius: '8px',
             boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-            width: cardWidth, // Dynamically set width
+            // width: cardWidth, 
             height: 'min-content',
           }}
         >
@@ -101,6 +115,7 @@ const DashboardRecipient = ({ data, numCards }) => {
         </Card>
       ))}
     </CardContainer>
+    </div>
    </>
   );
 };

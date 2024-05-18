@@ -9,7 +9,8 @@ import Collapse from '@mui/material/Collapse';
  import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
  import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
+ import "./Dashboard.css"
+ import image from './images/image.png';
 
 
 const CardContainer = styled('div')({
@@ -49,7 +50,19 @@ const DonorCard = () =>
     };
   
 
-  return (
+  return (<>
+    <div className="user-action">
+      <div className='user-info'>
+       <img src={image} alt="user" className='user-avatar' />
+        <div className="user-name">
+        <h2>Stories</h2>
+      
+        </div>
+      </div>
+    </div>
+  
+  
+    
     <CardContainer>
        {Array.from({ length: 6 }).map((_, index) => ( 
         <Card
@@ -60,6 +73,7 @@ const DonorCard = () =>
             boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
             width: '100%',
             height: 'min-content',
+            marginBottom:'1rem',
           }}
         >
           <CardHeader
@@ -101,6 +115,7 @@ const DonorCard = () =>
       )) 
        } 
     </CardContainer>
+  </>
   );
 };
 

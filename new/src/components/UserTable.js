@@ -7,29 +7,29 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+function createData(name, Servings, Date, Recipient, protein) {
+  return { name, Servings, Date, Recipient, protein };
 }
 
 const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
+  createData('flan flan', 159, 6.0, 24, 4.0),
+  createData('flan flan flan', 237, 9.0, 37, 4.3),
+  createData('this that', 262, 16.0, 24, 6.0),
+  createData('hehe', 305, 3.7, 67, 4.3),
+  createData('lol', 356, 16.0, 49, 3.9),
 ];
 
 export default function DenseTable() {
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+      <Table sx={{ minWidth: 344 }} size="large" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell>Donation</TableCell>
+            <TableCell align="right">Servings</TableCell>
+            <TableCell align="right">Listing Date&nbsp;</TableCell>
+            <TableCell align="right">Recipient&nbsp;</TableCell>
+            <TableCell align="right">Protein&nbsp;</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -41,9 +41,9 @@ export default function DenseTable() {
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
+              <TableCell align="right">{row.Servings}</TableCell>
+              <TableCell align="right">{row.Date}</TableCell>
+              <TableCell align="right">{row.Recipient}</TableCell>
               <TableCell align="right">{row.protein}</TableCell>
             </TableRow>
           ))}

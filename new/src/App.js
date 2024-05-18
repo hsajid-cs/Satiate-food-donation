@@ -53,6 +53,9 @@ function App() {
       <Route path="/login" element={<LoginForm/>} />
       <Route path="/dashboard-donor" element={<DashboardDonor numCards={3} />} />
       <Route path="/dashboard-recipient" element={<DashboardRecipient data={exampleData} numCards={3} />} />
+      <Route path="/login" element={<LoginForm />} />
+      <Route path="/dashboard-donor" element={<DashboardDonor numCards={6} />} />
+      <Route path="/dashboard-recipient" element={<DashboardRecipient data={exampleData} numCards={2} />} />
       <Route path="/dashboard-rider" element={<DashboardRider numCards={2} />} />
      
       </Routes>

@@ -46,8 +46,7 @@ function Navbar() {
 
   useEffect(() => {
     // Check if user is logged in (You should replace this with your actual authentication logic)
-    const userIsLoggedIn = !false;
-    // const userIsLoggedIn = localStorage.getItem('token') !== null;
+    const userIsLoggedIn = localStorage.getItem('token') !== null;
     setIsLoggedIn(userIsLoggedIn);
     
   }, []);
@@ -138,7 +137,7 @@ function Navbar() {
               </li>
 
               <li className='nav-item'>
-                <Link to='/dashboard-donor' className='nav-links' onClick={closeMobileMenu}>
+                <Link to='/dashboard-rider' className='nav-links' onClick={closeMobileMenu}>
                   About Us
                 </Link>
               </li>
