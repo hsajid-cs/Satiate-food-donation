@@ -32,8 +32,11 @@ const LoginForm = () => {
       if (selectedValue === 'Donor') {
         endpoint = 'http://localhost:3000/fatima/donors/login-donor';
       } else if (selectedValue === 'Recipient') {
-        endpoint = 'http://localhost:3000/fatima/donors/signup-donor';
-      } else {
+        endpoint = 'http://localhost:3000/fatima/recipients/login-recipient';
+      }
+      else if (selectedValue === 'Rider') {
+        endpoint = 'http://localhost:3000/fatima/riders/login-rider';}
+         else {
        
         return;
       }
@@ -42,8 +45,9 @@ const LoginForm = () => {
         username,
         password
       });
-
+      localStorage.setItem('token', response.data.token);
       console.log('Login response:', response.data);
+
       // Redirect or set state based on response
     } catch (error) {
       console.error('Error logging in:', error);

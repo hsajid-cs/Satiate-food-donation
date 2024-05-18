@@ -13,12 +13,26 @@ const SignInFormO = () => {
     const [address, setAddress] = useState('');
     const [email, setEmail] = useState('');
     const [contact, setContact] = useState('');
-    if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition((position) => {
-            console.log(position.coords.latitude);
-            console.log(position.coords.longitude);
-        })
-    }
+    
+    let currentPosition = null;
+
+    const getCurrentPosition = (callback) => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    currentPosition = [position.coords.latitude, position.coords.longitude];
+                    callback(currentPosition);
+                },
+                (error) => {
+                    console.error('Error getting current position:', error);
+                    callback(null);
+                }
+            );
+        } else {
+            console.error('Geolocation is not supported by this browser.');
+            callback(null);
+        }
+    };
 
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
@@ -35,15 +49,43 @@ const SignInFormO = () => {
         const handleContactChange = (event) => {
             setContact(event.target.value); };
 
-        const handleSignup = async (e) => {
-            e.preventDefault();
-            console.log('Username:', username);
-            console.log('Password:', password);
-            console.log('Address:', address);
-            console.log('Email:', email);
-            console.log('Contact:', contact);
-        };
-
+            const handleSignup = async (e) => {
+                e.preventDefault();
+            
+                if (!username || !password || !address || !email || !contact) {
+                    // Display a dialog box or alert informing the user that a field is empty
+                    alert('Please fill in all fields.');
+                    return; // Exit the function early if any field is empty
+                }
+            
+                getCurrentPosition(async (coords) => {
+                    try {
+                        const response = await fetch('http://localhost:3000/fatima/recipients/signup-recipient', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                username,
+                                contact,
+                                address,
+                                email,
+                                password,
+                                location: coords
+                            }),
+                        });
+            
+                        const data = await response.json();
+                        localStorage.setItem('token', data.token);
+                        console.log('Success:', data);
+                        // Handle success response
+                    } catch (error) {
+                        console.error('Error:', error);
+                        // Handle error
+                    }
+                });
+            };
+            
   return (
   <div className='login-container'>
     <div className='header'>

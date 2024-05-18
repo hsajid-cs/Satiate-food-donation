@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -6,7 +6,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import MenuItem from '@mui/material/MenuItem';
-// import { colors } from '@mui/material';
+// import { createTheme, ThemeProvider } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const startWork = [
   { value: '9', label: '9' },
@@ -20,31 +21,79 @@ const startWork = [
   { value: '17', label: '17' },
 ];
 
+const endWorkOptions = [
+  { value: '13', label: '13' },
+  { value: '14', label: '14' },
+  { value: '15', label: '15' },
+  { value: '16', label: '16' },
+  { value: '17', label: '17' },
+  { value: '18', label: '18' },
+  { value: '19', label: '19' },
+  { value: '20', label: '20' },
+  { value: '21', label: '21' },
+];
+
+const initialState = {
+  username: '',
+  contact: '',
+  email: '',
+  license_plate: '',
+  starting_time: '',
+  ending_time: '',
+};
+
 // Initialize endWork with the same values as startWork
 export default function AddRider() {
-  const [open, setOpen] = React.useState(false);
-  const [selectedStart, setSelectedStart] = React.useState('9');
-  const [endWork, setEndWork] = React.useState([...startWork]);
+  const isSmallScreen = useMediaQuery('(max-width:600px)');
+  
 
+  const [open, setOpen] = React.useState(false);
+  const [submitted, setSubmitted] = React.useState(false);
+  const [endWork, setEndWork] = React.useState([...endWorkOptions]);
+  const [formData, setFormData] = React.useState({ ...initialState });
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    if (!submitted) { // Check if form has been submitted
+      const confirmClose = window.confirm('Are you sure you want to close without adding the rider?');
+      if (confirmClose) {
+        setFormData({ ...initialState });
+        setOpen(false);
+      }
+    } else {
+      setOpen(false); // Close the dialog without confirmation if form has been submitted
+    }
   };
+
   const handleStartChange = (event) => {
-    setSelectedStart(event.target.value);
     updateEndWork(event.target.value);
   };
 
+
   const updateEndWork = (selectedStart) => {
     const startHour = parseInt(selectedStart);
-    // Filter out end hours that are within range and at least 4 hours from selected start hour
-    const filteredEndWork = startWork.filter(
-      (option) => parseInt(option.value) >= startHour + 4 && parseInt(option.value) <= 20
+    const filteredEndWork = endWorkOptions.filter(
+      (option) => parseInt(option.value) >= startHour + 4 && parseInt(option.value) <= 21
     );
     setEndWork(filteredEndWork);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const formJson = {
+      username: formData.get('name'),
+      contact: formData.get('contact'),
+      email: formData.get('email-address'),
+      license_plate: formData.get('license'),
+      starting_time: formData.get('start-work'),
+      ending_time: formData.get('end-work'),
+    };
+    console.log('Rider:', formJson);
+    setSubmitted(true); // Set form submission state to true
+    handleClose();
   };
 
   return (
@@ -57,13 +106,7 @@ export default function AddRider() {
         onClose={handleClose}
         PaperProps={{
           component: 'form',
-          onSubmit: (event) => {
-            event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-            const formJson = Object.fromEntries(formData.entries());
-            const email = formJson.email;
-            handleClose();
-          },
+          onSubmit: handleSubmit, // Use handleSubmit function for form submission
         }}
       >
         <DialogTitle>Add New Carrier</DialogTitle>
@@ -109,7 +152,7 @@ export default function AddRider() {
             id="contact"
             name="contact"
             label="Phone Number"
-            type="email"
+            type="text"
             fullWidth
             variant="outlined"
           />
@@ -120,6 +163,12 @@ export default function AddRider() {
           label="From"
           defaultValue="9"
           onChange={handleStartChange}
+          sx={{
+            maxWidth: '180px',
+            width: isSmallScreen ? '100%' : '50%', // Adjust width based on screen size
+            // ml: isSmallScreen ? 2 : 0, // Add margin left for larger screens
+            mb: isSmallScreen ? 2 : 0, // Add margin bottom for small screens
+          }}
         >
           {startWork.map((option) => (
             <MenuItem key={option.value} value={option.value}>
@@ -132,9 +181,12 @@ export default function AddRider() {
           select
           label="Till"
           defaultValue={endWork.length > 0 ? endWork[0].value : ''}
-        //   fullWidth
-          sx={{ minWidth: '120px' }}
-          style={{ marginLeft: '8px' }}
+          sx={{
+            maxWidth: '180px',
+            width: isSmallScreen ? '100%' : '50%', // Adjust width based on screen size
+            ml: isSmallScreen ? 0 : 2, // Add margin left for larger screens
+            // mb: isSmallScreen ? 2 : 0, // Add margin bottom for small screens
+          }}
         >
           {endWork.map((option) => (
             <MenuItem key={option.value} value={option.value}>
@@ -147,7 +199,6 @@ export default function AddRider() {
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button type="submit" >Add</Button>
-          {/* style={{ color: 'white', backgroundColor: 'green' }} */}
         </DialogActions>
       </Dialog>
     </React.Fragment>
