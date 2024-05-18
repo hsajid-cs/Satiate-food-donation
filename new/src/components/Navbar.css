@@ -1,10 +1,5 @@
 .navbar {
-<<<<<<< HEAD
-  background: linear-gradient(90deg, rgb(30, 162, 126) 0%, rgb(47, 56, 57) 100%); /*#1ea27e;*/
-  height: 80px;
-=======
   background: linear-gradient(90deg, rgb(30, 162, 126) 0%, rgb(47, 56, 57) 100%); 
->>>>>>> 23e31c0755d90e4cbfb2b85bbc3b190a31a4e929
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,7 +53,7 @@ background: rgba(0,0,0,0.5);
   text-align: center;
   width: 60vw;
   justify-content: end;
-  margin-right: 2rem;
+  margin-right: 0.5rem;
 }
 
 .nav-item {
@@ -72,14 +67,17 @@ background: rgba(0,0,0,0.5);
   text-decoration: none;
   padding: 0.5rem 1rem;
   height: 100%;
-<<<<<<< HEAD
-=======
   cursor: pointer;
 }
 
 .nav-item .nav-links {
   cursor: pointer;
->>>>>>> 23e31c0755d90e4cbfb2b85bbc3b190a31a4e929
+}
+
+.user-links-container {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
 }
 
 .user-links {
@@ -89,6 +87,7 @@ background: rgba(0,0,0,0.5);
   text-decoration: none;
   padding: 0.5rem 1rem;
   height: 100%;
+
 }
 
 .nav-links:hover {
@@ -113,13 +112,10 @@ background: rgba(0,0,0,0.5);
     position: relative;
   }
 
-<<<<<<< HEAD
-=======
   .navbar-logo{
     margin-left: 10px;
   }
 
->>>>>>> 23e31c0755d90e4cbfb2b85bbc3b190a31a4e929
   .nav-menu {
     display: flex;
     flex-direction: column;
@@ -196,14 +192,6 @@ background: rgba(0,0,0,0.5);
     transition: 250ms;
   }
 
-<<<<<<< HEAD
-  .user-links {
-    display: inline-flex;
-    align-self: end;
-  }
-}
-
-=======
   /* .user-links {
     display: inline-flex;
     align-self: end;
@@ -227,7 +215,6 @@ background: rgba(0,0,0,0.5);
   align-items: center;
 }
 
->>>>>>> 23e31c0755d90e4cbfb2b85bbc3b190a31a4e929
 .btn-wrapper {
   display: flex;
 }
@@ -235,7 +222,3 @@ background: rgba(0,0,0,0.5);
 .btn-wrapper button {
   margin-right: 10px;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 23e31c0755d90e4cbfb2b85bbc3b190a31a4e929

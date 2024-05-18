@@ -114,7 +114,6 @@ function Navbar() {
                   <div className="nav-links" onClick={handleSignupLinkClick}>
                     Sign Up  
                   </div>
->>>>>>> 23e31c0755d90e4cbfb2b85bbc3b190a31a4e929
                 </li>
               )
             }
@@ -123,7 +122,6 @@ function Navbar() {
             {window.innerWidth <= 960 && (
 =======
             {!isLoggedIn && window.innerWidth <= 960 && (
->>>>>>> 23e31c0755d90e4cbfb2b85bbc3b190a31a4e929
                 <li className="nav-item mobile-only">
                   <Link to="/login" className="nav-links" onClick={closeMobileMenu}>
                      Log In
@@ -131,6 +129,7 @@ function Navbar() {
                 </li>
               )
             }
+
 <<<<<<< HEAD
 =======
             {isLoggedIn && window.innerWidth <= 960 && (
@@ -149,7 +148,7 @@ function Navbar() {
               </li>
 
               <li className='nav-item'>
-                <Link to='/dashboard-donor' className='nav-links' onClick={closeMobileMenu}>
+                <Link to='/dashboard-rider' className='nav-links' onClick={closeMobileMenu}>
                   About Us
                 </Link>
               </li>
@@ -169,6 +168,7 @@ function Navbar() {
             
             
             {isLoggedIn ? (
+              <>
               <div className='user-links-container'>
 >>>>>>> 23e31c0755d90e4cbfb2b85bbc3b190a31a4e929
                   <Link to="/notifications" className='user-links'>
@@ -177,15 +177,18 @@ function Navbar() {
                   <Link to="/profile" className='user-links'>
                     <i className="fas fa-user"  />
                   </Link>
-<<<<<<< HEAD
+                  
+              </div>
+              <div className='btn-wrapper'>
+              {window.innerWidth >= 960 && button2 && 
+                <Button className="logout-btn" buttonStyle='btn--outline' onClick={handleSignupClick}>
+                  Log Out
+                </Button>
+              }
+              </div>
               </>
             ) : (
-              <><Link to='/' onClick={handleLoginClick}> 
-=======
-              </div>
-            ) : (
               <div className="btn-wrapper"><Link to='/' onClick={handleLoginClick}> 
->>>>>>> 23e31c0755d90e4cbfb2b85bbc3b190a31a4e929
               {window.innerWidth >= 960 && button1 && <Button buttonStyle='btn--outline' >Log In</Button>} 
               </Link>
  
@@ -194,17 +197,10 @@ function Navbar() {
                   Sign Up
                 </Button>
               }
-<<<<<<< HEAD
-                </>)}
-              
-            </div>
-        </div>
-=======
               </div>
                 )}
               
             </div>
->>>>>>> 23e31c0755d90e4cbfb2b85bbc3b190a31a4e929
     </nav>
     
     {showModal && (

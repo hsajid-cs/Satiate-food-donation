@@ -16,6 +16,8 @@ import DashboardRider from './components/DashboardRider';
 import DashboardRecipient from './components/DashboardRecipient';
 import DashboardDonor from './components/DashboardDonor';
 import { Home } from './components/Home';
+import ListFood from './components/ListFood';
+import AboutUs from './components/AboutUs';
 
 const exampleData = [
   {
@@ -35,6 +37,7 @@ const exampleData = [
     expiryDate: "30/06/2024",
   },
 ];
+const status = 'pending';
 
 
 function App() {
@@ -42,21 +45,7 @@ function App() {
     <>
     <Router>
  
-     <Navbar />
-
-    {/* //  <DonorCard/> */}
-     {/* <Box
-  display="flex"
-  justifyContent="center"
-  boxSizing={"border-box"}
-  alignItems="center"
-  minHeight="100vh"
->
-<DonorCard/>
-</Box>
-    */}
-
-<body>
+     <Navbar/>
       <Routes>
       <Route path='/' element={<Navigate to="/home" />} />
       <Route path='/home' element={<Home/>}/>
@@ -64,13 +53,17 @@ function App() {
       <Route path="/signup-organization" element={<SignInFormO />} />
       <Route path="/signup-donor" element={<SignInFormD />} />
       <Route path='/FAQ' element={<FAQ />} />
-      <Route path="/login" element={<LoginForm />} />
+      <Route path="/login" element={<LoginForm/>} />
       <Route path="/dashboard-donor" element={<DashboardDonor numCards={3} />} />
       <Route path="/dashboard-recipient" element={<DashboardRecipient data={exampleData} numCards={3} />} />
-      <Route path="/dashboard-rider" element={<DashboardRider numCards={2} />} />
+      <Route path="/login" element={<LoginForm />} />
+      <Route path="/about-us" element={<AboutUs/>} />
+      <Route path="/dashboard-donor" element={<DashboardDonor numCards={6} />} />
+      <Route path="/dashboard-recipient" element={<DashboardRecipient data={exampleData} numCards={2} />} />
+      
+      <Route path="/dashboard-rider" element={<DashboardRider numCards={2} foodStatus={status} statusSource={ListFood}/>} />
      
       </Routes>
-      </body>
 <Footer />
       
     </Router>

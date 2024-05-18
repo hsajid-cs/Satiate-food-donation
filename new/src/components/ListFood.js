@@ -30,7 +30,7 @@ export default function ListFood() {
 
   return (
     <React.Fragment>
-      <Button  onClick={handleClickOpen}>
+      <Button  onClick={handleClickOpen} style={{color: 'white'}}>
        Donate Now
       </Button>
       <Dialog

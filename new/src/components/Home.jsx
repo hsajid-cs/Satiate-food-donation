@@ -6,9 +6,8 @@ export const Home = () => {
   return (
     <>
     <div className='main'>
-        <div className="overlay"></div>
         <video src={video} autoPlay loop muted />
-    </div>
+    </div> 
     </>
   )
 }

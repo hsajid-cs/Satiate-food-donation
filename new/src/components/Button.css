@@ -11,9 +11,11 @@
   }
   
   .btn--primary {
+
     background-color: var(--primary);
     color: #242424;
     border: 1px solid var(--primary);
+ 
   }
   
   .btn--outline {
