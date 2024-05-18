@@ -17,6 +17,7 @@ import DashboardRecipient from './components/DashboardRecipient';
 import DashboardDonor from './components/DashboardDonor';
 import { Home } from './components/Home';
 import ListFood from './components/ListFood';
+import AboutUs from './components/AboutUs';
 
 const exampleData = [
   {
@@ -66,6 +67,7 @@ function App() {
       <Route path="/signup-donor" element={<SignInFormD />} />
       <Route path='/FAQ' element={<FAQ />} />
       <Route path="/login" element={<LoginForm />} />
+      <Route path="/about-us" element={<AboutUs/>} />
       <Route path="/dashboard-donor" element={<DashboardDonor numCards={6} />} />
       <Route path="/dashboard-recipient" element={<DashboardRecipient data={exampleData} numCards={2} />} />
       
