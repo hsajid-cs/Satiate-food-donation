@@ -63,6 +63,7 @@ margin-left: 20rem;}
     position: absolute;
     display: flex;
     justify-content: center;
+ 
 }
 .user-table{
     display:flex;
@@ -97,7 +98,10 @@ margin-left: 20rem;}
 
 }
 
-
+.progressUpdate{
+    /* display:flex; */
+    margin-left:15rem;
+}
 @media screen and (max-width: 1317px){
     .user-table{
         margin-left: 2rem;
