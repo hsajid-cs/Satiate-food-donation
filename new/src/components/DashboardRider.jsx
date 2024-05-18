@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 // import UserTable from './UserTable';
 import './Dashboard.css'
+import UpdateStatus from './UpdateStatus';
 const CardContainer = styled('div')({
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
@@ -32,12 +33,23 @@ const ExpandMore = styled((props) => {
 
 const DashboardRider = ({ numCards }) => {
   const [expanded, setExpanded] = React.useState({});
+  const [statusOpen, setStatusOpen] = React.useState(false);
 
   const handleExpandClick = (index) => {
     setExpanded((prevState) => ({
       ...prevState,
       [index]: !prevState[index],
-    }));
+      
+    
+  }));
+  };
+
+  const openStatusBar = () => {
+    setStatusOpen(true);
+  };
+
+  const closeStatusBar = () => {
+    setStatusOpen(false);
   };
 
   // const cardWidth = numCards <= 2 ? '60%' : 'calc(70% - 10px)'; // Adjust width based on the number of cards
@@ -49,9 +61,16 @@ const DashboardRider = ({ numCards }) => {
         <img src="https://pluspng.com/img-png/user-png-icon-big-image-png-2240.png" alt="user" className='user-avatar' />
         <div className="user-name">
         <h2>UserName</h2>
-        {/* <h3>Location</h3> */}
+      
         </div>
+        
+        </div>
+        <div className="list-action" onClick={openStatusBar}>
+        Update Status
       </div>
+      <UpdateStatus open={statusOpen} handleClose={closeStatusBar} />
+    
+    
       </div>
       <div className="cards">
     <CardContainer>

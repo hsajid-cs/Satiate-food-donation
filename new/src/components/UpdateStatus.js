@@ -12,23 +12,18 @@ const status = [
     { value: 'Delivered', label: 'Delivered' },
 
 ];
-export default function UpdateStatus() {
-  const [open, setOpen] = React.useState(false);
+export default function UpdateStatus({ open, handleClose }) {
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
   return (
-    <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Update Status
-      </Button>
-      <Dialog
+    <React.Fragment>      <Dialog
         open={open}
         onClose={handleClose}
         PaperProps={{
@@ -42,7 +37,7 @@ export default function UpdateStatus() {
           },
         }}
       >
-        <DialogTitle>List New Food</DialogTitle>
+        <DialogTitle>status</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus

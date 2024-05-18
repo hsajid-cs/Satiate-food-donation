@@ -80,6 +80,49 @@ export default function AddRider() {
     setEndWork(filteredEndWork);
   };
 
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   const formData = new FormData(event.currentTarget);
+  //   const formJson = {
+  //     name: formData.get('name'),
+  //     contact: formData.get('contact'),
+  //     email: formData.get('email-address'),
+  //     license_plate: formData.get('license'),
+  //     starting_time: formData.get('start-work'),
+  //     ending_time: formData.get('end-work'),
+  //   };
+  //   console.log('Rider:', formJson);
+  
+  //   try {
+  //     // Call an asynchronous function to handle the fetch
+  //     await handleFetch(formJson);
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //     alert('An error occurred while sending the email.');
+  //   }
+  
+  //   setSubmitted(true);
+  //   handleClose();
+  // };
+  
+  // // Define an asynchronous function to handle the fetch
+  // const handleFetch = async (formJson) => {
+  //   const response = await fetch('http://localhost:5000/api/send-email', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(formJson),
+  //   });
+  
+  //   const data = await response.json();
+  //   if (data.success) {
+  //     alert('Email sent successfully!');
+  //   } else {
+  //     alert('Failed to send email.');
+  //   }
+  // };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -92,6 +135,31 @@ export default function AddRider() {
       ending_time: formData.get('end-work'),
     };
     console.log('Rider:', formJson);
+  //   try {
+  //     const response = await fetch('http://localhost:5000/api/send-email', { // Update URL with your backend server URL
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(formJson),
+  //     });
+  
+  //     const data = await response.json();
+  //     if (data.success) {
+  //       alert('Email sent successfully!');
+  //       setSubmitted(true);
+  //     } else {
+  //       alert('Failed to send email.');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //     alert('An error occurred while sending the email.');
+  //   }
+  
+  //   setSubmitted(true);
+  //   handleClose();
+  // };
+    // implement the email logic here
     setSubmitted(true); // Set form submission state to true
     handleClose();
   };
