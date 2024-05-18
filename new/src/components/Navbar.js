@@ -46,7 +46,7 @@ function Navbar() {
 
   useEffect(() => {
     // Check if user is logged in (You should replace this with your actual authentication logic)
-    const userIsLoggedIn = !false;
+    const userIsLoggedIn = false;
     setIsLoggedIn(userIsLoggedIn);
     
   }, []);
