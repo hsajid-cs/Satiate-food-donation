@@ -10,6 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AssignRider from './AssignRider';
+import AddRider from './AddRider';
 import './Dashboard.css'
 
 const CardContainer = styled('div')({
@@ -59,10 +60,11 @@ const DashboardRecipient = ({ data, numCards }) => {
         <h3>Location</h3>
         </div>
         </div>
+        <div className="list-action">
+        <AddRider className="action-btn" />
       </div>
-      {/* <div className="list-action">
-        <ListFood className="action-btn" />
-      </div> */}
+      </div>
+      
     <div className="cards">
      <CardContainer>
     {data.map((item, index) => (
