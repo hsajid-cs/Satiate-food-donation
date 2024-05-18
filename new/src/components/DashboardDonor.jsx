@@ -38,7 +38,7 @@ const DashboardDonor = ({ numCards }) => {
     });
   };
 
-  const cardWidth = numCards <= 2 ? '60%' : 'calc(70% - 10px)'; // Adjust width based on the number of cards
+  // const cardWidth = numCards <= 2 ? '60%' : 'calc(70% - 10px)'; // Adjust width based on the number of cards
 
   return (
     <>
@@ -64,7 +64,7 @@ const DashboardDonor = ({ numCards }) => {
               backgroundColor: '#f5f5f5',
               borderRadius: '8px',
               boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-              width: cardWidth, // Dynamically set width
+            //   width: cardWidth, // Dynamically set width
               height: 'min-content',
             }}
           >

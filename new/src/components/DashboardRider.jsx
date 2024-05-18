@@ -10,6 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 // import UserTable from './UserTable';
+import './Dashboard.css'
 const CardContainer = styled('div')({
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
@@ -39,10 +40,20 @@ const DashboardRider = ({ numCards }) => {
     }));
   };
 
-  const cardWidth = numCards <= 2 ? '60%' : 'calc(70% - 10px)'; // Adjust width based on the number of cards
+  // const cardWidth = numCards <= 2 ? '60%' : 'calc(70% - 10px)'; // Adjust width based on the number of cards
 
   return (
     <>
+     <div className="user-action">
+      <div className='user-info'>
+        <img src="https://pluspng.com/img-png/user-png-icon-big-image-png-2240.png" alt="user" className='user-avatar' />
+        <div className="user-name">
+        <h2>UserName</h2>
+        {/* <h3>Location</h3> */}
+        </div>
+      </div>
+      </div>
+      <div className="cards">
     <CardContainer>
       {Array.from({ length: numCards }).map((_, index) => (
         <Card
@@ -51,7 +62,7 @@ const DashboardRider = ({ numCards }) => {
             backgroundColor: '#f5f5f5',
             borderRadius: '8px',
             boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-            width: cardWidth, // Dynamically set width
+            // width: cardWidth, 
             height: 'min-content',
           }}
         >
@@ -92,7 +103,8 @@ const DashboardRider = ({ numCards }) => {
         
       ))}
     </CardContainer>
-   {/* <UserTable/> */}
+    </div>
+ 
    </>
   );
 };
