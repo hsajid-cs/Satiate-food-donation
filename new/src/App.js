@@ -16,6 +16,7 @@ import DashboardRider from './components/DashboardRider';
 import DashboardRecipient from './components/DashboardRecipient';
 import DashboardDonor from './components/DashboardDonor';
 import { Home } from './components/Home';
+import ListFood from './components/ListFood';
 
 const exampleData = [
   {
@@ -35,6 +36,7 @@ const exampleData = [
     expiryDate: "30/06/2024",
   },
 ];
+const status = 'pending';
 
 
 function App() {
@@ -67,7 +69,7 @@ function App() {
       <Route path="/dashboard-donor" element={<DashboardDonor numCards={6} />} />
       <Route path="/dashboard-recipient" element={<DashboardRecipient data={exampleData} numCards={2} />} />
       
-      <Route path="/dashboard-rider" element={<DashboardRider numCards={2} />} />
+      <Route path="/dashboard-rider" element={<DashboardRider numCards={2} foodStatus={status} statusSource={ListFood}/>} />
      
       </Routes>
 <Footer />
