@@ -48,6 +48,11 @@ function Navbar() {
     // Check if user is logged in (You should replace this with your actual authentication logic)
     const userIsLoggedIn = localStorage.getItem('token') !== null;
     setIsLoggedIn(userIsLoggedIn);
+
+  useEffect(() => {
+    // Check if user is logged in (You should replace this with your actual authentication logic)
+    const userIsLoggedIn = false;
+    setIsLoggedIn(userIsLoggedIn);
     
   }, []);
   const openModal = () => {
@@ -104,6 +109,13 @@ function Navbar() {
             </div>
             
             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+<<<<<<< HEAD
+            {window.innerWidth <= 960 && (
+                <li className="nav-item mobile-only">
+                  <Link to="/" className="nav-links" onClick={closeMobileMenu}>
+                    Sign Up  
+                  </Link>
+=======
             {!isLoggedIn && window.innerWidth <= 960 && (
                 <li className="nav-item mobile-only">
                   <div className="nav-links" onClick={handleSignupLinkClick}>
@@ -113,6 +125,9 @@ function Navbar() {
               )
             }
 
+<<<<<<< HEAD
+            {window.innerWidth <= 960 && (
+=======
             {!isLoggedIn && window.innerWidth <= 960 && (
                 <li className="nav-item mobile-only">
                   <Link to="/login" className="nav-links" onClick={closeMobileMenu}>
@@ -122,6 +137,8 @@ function Navbar() {
               )
             }
 
+<<<<<<< HEAD
+=======
             {isLoggedIn && window.innerWidth <= 960 && (
                 <li className="nav-item mobile-only">
                   <div className="nav-links" onClick={handleLogout}>
@@ -130,6 +147,7 @@ function Navbar() {
                 </li>
               )
             }
+>>>>>>> 23e31c0755d90e4cbfb2b85bbc3b190a31a4e929
               <li className='nav-item'>
                 <Link to='/stories' className='nav-links' onClick={closeMobileMenu}>
                   Stories
@@ -149,11 +167,17 @@ function Navbar() {
               </li>
 
             </ul>
+<<<<<<< HEAD
+            <div className="btn-wrapper">
+            {isLoggedIn ? (
+              <>
+=======
             
             
             {isLoggedIn ? (
               <>
               <div className='user-links-container'>
+>>>>>>> 23e31c0755d90e4cbfb2b85bbc3b190a31a4e929
                   <Link to="/notifications" className='user-links'>
                     <i className="fas fa-bell" />
                   </Link>
