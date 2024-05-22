@@ -6,39 +6,42 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import MenuItem from '@mui/material/MenuItem';
-
-const fetchRiders = async () => {
-  // Implement your MongoDB fetch logic here
-  // This is just a placeholder
-  return [
-    { id: 'rider1', name: 'Rider 1' },
-    { id: 'rider2', name: 'Rider 2' },
-    // Add more riders dynamically
-  ];
-};
-
-const fetchRiderDetails = async (riderId) => {
-  // Implement your MongoDB fetch logic here
-  // This is just a placeholder
-  if(riderId === 'rider1')
-  return {
-    license: 'ABC123',
-    email: 'rider1@example.com',
-    contact: '1234567890',
-    startWork: '9',
-    endWork: '17',
-  };
-  else if(riderId === 'rider2')
-    return{
-      license: 'XYZ123',
-      email: 'rider2@example.com'
-      , contact: '0987654321',
-      startWork: '10',
-      endWork: '18',};
-};
+import {jwtDecode} from 'jwt-decode';
 
 // Initialize endWork with the same values as startWork
-const AssignRider= ({ onClickAssign, index }) => {
+const AssignRider= ({ onClickAssign,donationId}) => {
+  const fetchRiders = async () => {
+    try {
+      // Retrieve the recipient ID from local storage
+      const token = localStorage.getItem('token');
+      const recipientId = jwtDecode(token).userId;
+      
+  
+      // Make a request to your server to fetch riders for the recipient
+      const response = await fetch(`http://localhost:3002/fatima/recipients/riders/${recipientId}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`, // Include token if needed
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (!response.ok) {
+        // Handle error response
+        console.error('Error fetching riders:', response.statusText);
+        return;
+      }
+  
+      const data = await response.json();
+  
+      // Update the state with the fetched riders
+      return data.riders;
+    } catch (error) {
+      console.error('Error fetching riders:', error);
+    }
+    return [
+    ];
+  };
   const [open, setOpen] = React.useState(false);
   const [riders, setRiders] = useState([]);
   const [selectedRider, setSelectedRider] = useState('');
@@ -51,13 +54,16 @@ const AssignRider= ({ onClickAssign, index }) => {
   });
   const handleClick = () => {
     setOpen(true);
-    onClickAssign(index);
+    console.log(donationId);
+    onClickAssign(donationId);
+    console.log(donationId);
   };
 
   useEffect(() => {
     const fetchRidersData = async () => {
       const ridersData = await fetchRiders();
       setRiders(ridersData);
+      console.log(ridersData);
     };
 
     fetchRidersData();
@@ -69,14 +75,49 @@ const AssignRider= ({ onClickAssign, index }) => {
 
   const handleRiderChange = async (event) => {
     const riderId = event.target.value;
+  
     setSelectedRider(riderId);
-    const details = await fetchRiderDetails(riderId);
-    setRiderDetails(details);
-  };
+  
+    const rider = riders.find(r => r._id === riderId);
+  
+    setRiderDetails(rider);
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    // Logic to assign rider to the card with the specified index
+    console.log(`Assigning rider ${selectedRider} to donation ${donationId}`);
+    setOpen(false);
+  
+      try {
+        const token = localStorage.getItem('token');
+        const recipientId = jwtDecode(token).userId;
+  
+        const response = await fetch(`http://localhost:3002/fatima/recipients/assign-rider/${recipientId}/${donationId}`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ riderId: selectedRider }),
+        });
+  
+        if (!response.ok) {
+          console.error('Error assigning rider:', response.statusText);
+          return;
+        }
+  
+        const data = await response.json();
+        console.log('Rider assigned successfully:', data);
+        setOpen(false);
+      } catch (error) {
+        console.error('Error assigning rider:', error);
+      }
+    };
 
   return (
     <React.Fragment>
-      <Button variant="outlined" onClick={handleClick} style={{color: 'black'}}>
+      <Button onClick={handleClick} style={{color: 'black', backgroundColor:"#1ea27e"}}>
         Assign Carrier
       </Button>
       <Dialog
@@ -84,13 +125,7 @@ const AssignRider= ({ onClickAssign, index }) => {
         onClose={handleClose}
         PaperProps={{
           component: 'form',
-          onSubmit: (event) => {
-            event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-            const formJson = Object.fromEntries(formData.entries());
-            // const email = formJson.email;
-            handleClose();
-          },
+          onSubmit: handleSubmit,
         }}
       >
         <DialogTitle>Assign Carrier for Delivery</DialogTitle>
@@ -111,8 +146,8 @@ const AssignRider= ({ onClickAssign, index }) => {
             onChange={handleRiderChange}
             
           >{riders.map((rider) => (
-            <MenuItem key={rider.id} value={rider.id}>
-              {rider.name}
+            <MenuItem key={rider._id} value={rider._id}>
+              {rider.username}
             </MenuItem>
           ))}</TextField>
           
@@ -122,9 +157,8 @@ const AssignRider= ({ onClickAssign, index }) => {
             margin="dense"
             id="license"
             name="license"
-            label="License Plate"
             type="text"
-            value={riderDetails.license}
+            value={riderDetails.number_plate}
             fullWidth
             variant="outlined"
           />
@@ -156,13 +190,13 @@ const AssignRider= ({ onClickAssign, index }) => {
         <TextField
           id="start-work"
           disabled
-          value={riderDetails.startWork}
+          value={riderDetails.starting_time}
         >
         </TextField>
         <TextField
           id="end-work"
           disabled
-          value={riderDetails.endWork}
+          value={riderDetails.ending_time}
         //   fullWidth
           // sx={{ minWidth: '120px' }}
           style={{ marginLeft: '8px' }}

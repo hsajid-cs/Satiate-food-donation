@@ -7,44 +7,36 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-function createData(name, Servings, Date, Recipient, protein) {
-  return { name, Servings, Date, Recipient, protein };
-}
+export default function DenseTable({ data }) {
 
-const rows = [
-  createData('flan flan', 159, 6.0, 24, 4.0),
-  createData('flan flan flan', 237, 9.0, 37, 4.3),
-  createData('this that', 262, 16.0, 24, 6.0),
-  createData('hehe', 305, 3.7, 67, 4.3),
-  createData('lol', 356, 16.0, 49, 3.9),
-];
-
-export default function DenseTable() {
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { day: '2-digit', month: 'short', year: 'numeric' };
+    return date.toLocaleDateString('en-GB', options);
+  };
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 344 }} size="large" aria-label="a dense table">
         <TableHead>
           <TableRow>
             <TableCell>Donation</TableCell>
-            <TableCell align="right">Servings</TableCell>
+            <TableCell align="right">Serving</TableCell>
             <TableCell align="right">Listing Date&nbsp;</TableCell>
             <TableCell align="right">Recipient&nbsp;</TableCell>
-            <TableCell align="right">Protein&nbsp;</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {data.map((data) => (
             <TableRow
-              key={row.name}
+              key={data.food_type}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                {data.expiry_date}
               </TableCell>
-              <TableCell align="right">{row.Servings}</TableCell>
-              <TableCell align="right">{row.Date}</TableCell>
-              <TableCell align="right">{row.Recipient}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              {/* <TableCell align="right">{data.donation_id}</TableCell> */}
+              <TableCell align="right">{formatDate(data.quantity)}</TableCell>
+              <TableCell align="right">{data.recipient}</TableCell>
             </TableRow>
           ))}
         </TableBody>

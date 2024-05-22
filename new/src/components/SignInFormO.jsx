@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import "./SignInFormD.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import user_icon from "./images/loginsignup/person.png"
 import email_icon from "./images/loginsignup/email.png"
 import password_icon from "./images/loginsignup/password.png"
@@ -8,6 +8,7 @@ import location_icon from "./images/loginsignup/loc.png"
 import contact_icon from "./images/loginsignup/contact.png"
 
 const SignInFormO = () => {
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [address, setAddress] = useState('');
@@ -42,6 +43,8 @@ const SignInFormO = () => {
         setPassword(event.target.value);
       };
 
+      
+
         const handleAddressChange = (event) => {
             setAddress(event.target.value); };
         const handleEmailChange = (event) => {
@@ -57,10 +60,20 @@ const SignInFormO = () => {
                     alert('Please fill in all fields.');
                     return; // Exit the function early if any field is empty
                 }
+
+                const emailRegex = /^\S+@\S+\.\S+$/;
+    if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+    }
+                if (password.length < 8) {
+                    alert('Password must be at least 8 characters long.');
+                    return;
+                  }
             
                 getCurrentPosition(async (coords) => {
                     try {
-                        const response = await fetch('http://localhost:3000/fatima/recipients/signup-recipient', {
+                        const response = await fetch('http://localhost:3002/fatima/recipients/signup-recipient', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -76,8 +89,8 @@ const SignInFormO = () => {
                         });
             
                         const data = await response.json();
-                        localStorage.setItem('token', data.token);
-                        console.log('Success:', data);
+                        alert("You have been successfully registered! Please login to continue.");
+                        navigate('/login');
                         // Handle success response
                     } catch (error) {
                         console.error('Error:', error);

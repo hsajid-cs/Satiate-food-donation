@@ -191,11 +191,11 @@ export const Modal = ({ showModal, setShowModal }) => {
                 <p className='mobile'>Too many in the world suffer from hunger and lack access to education. By 2050, 10 billion people presents challenges if trends continue. </p>
                 <div className='modal-container'>
                 <div className="submit-modal" onClick={() => handleClick('/signup-organization')}>
-    Register
+    NGO
   </div>
 
   <div className="submit-modal" onClick={() => handleClick('/signup-donor')}>
-   Donate
+   Donor
   </div>
                 </div>
               </ModalContent>

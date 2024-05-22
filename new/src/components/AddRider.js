@@ -1,13 +1,15 @@
-import React from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import MenuItem from '@mui/material/MenuItem';
-// import { createTheme, ThemeProvider } from '@mui/material/styles';
+import React,{useState} from 'react';
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  MenuItem,
+} from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import {jwtDecode} from 'jwt-decode';
 
 const startWork = [
   { value: '9', label: '9' },
@@ -34,12 +36,12 @@ const endWorkOptions = [
 ];
 
 const initialState = {
-  username: '',
+  username: '', 
   contact: '',
   email: '',
   license_plate: '',
-  starting_time: '',
-  ending_time: '',
+  starting_time: '9',
+  ending_time: '13'
 };
 
 // Initialize endWork with the same values as startWork
@@ -47,13 +49,16 @@ export default function AddRider() {
   const isSmallScreen = useMediaQuery('(max-width:600px)');
   
 
-  const [open, setOpen] = React.useState(false);
-  const [submitted, setSubmitted] = React.useState(false);
-  const [endWork, setEndWork] = React.useState([...endWorkOptions]);
-  const [formData, setFormData] = React.useState({ ...initialState });
+  const [open, setOpen] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [selectedStart, setSelectedStart] = useState('');
+const [selectedEnd, setSelectedEnd] = useState('');
+  const [endWork, setEndWork] = useState([...endWorkOptions]);
+  const [formData, setFormData] = useState({ ...initialState });
   const handleClickOpen = () => {
     setOpen(true);
   };
+
 
   const handleClose = () => {
     if (!submitted) { // Check if form has been submitted
@@ -68,8 +73,13 @@ export default function AddRider() {
   };
 
   const handleStartChange = (event) => {
+    setSelectedStart(event.target.value);
     updateEndWork(event.target.value);
   };
+
+  const handleEndChange = (e) => {
+    setSelectedEnd(e.target.value);
+  }
 
 
   const updateEndWork = (selectedStart) => {
@@ -79,94 +89,76 @@ export default function AddRider() {
     );
     setEndWork(filteredEndWork);
   };
-
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   const formData = new FormData(event.currentTarget);
-  //   const formJson = {
-  //     name: formData.get('name'),
-  //     contact: formData.get('contact'),
-  //     email: formData.get('email-address'),
-  //     license_plate: formData.get('license'),
-  //     starting_time: formData.get('start-work'),
-  //     ending_time: formData.get('end-work'),
-  //   };
-  //   console.log('Rider:', formJson);
-  
-  //   try {
-  //     // Call an asynchronous function to handle the fetch
-  //     await handleFetch(formJson);
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //     alert('An error occurred while sending the email.');
-  //   }
-  
-  //   setSubmitted(true);
-  //   handleClose();
-  // };
-  
-  // // Define an asynchronous function to handle the fetch
-  // const handleFetch = async (formJson) => {
-  //   const response = await fetch('http://localhost:5000/api/send-email', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(formJson),
-  //   });
-  
-  //   const data = await response.json();
-  //   if (data.success) {
-  //     alert('Email sent successfully!');
-  //   } else {
-  //     alert('Failed to send email.');
-  //   }
-  // };
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const formJson = {
+    const newRider = {
       username: formData.get('name'),
       contact: formData.get('contact'),
       email: formData.get('email-address'),
-      license_plate: formData.get('license'),
-      starting_time: formData.get('start-work'),
-      ending_time: formData.get('end-work'),
+      number_plate: formData.get('license'),
+      starting_time: selectedStart,
+    ending_time: selectedEnd
     };
-    console.log('Rider:', formJson);
-  //   try {
-  //     const response = await fetch('http://localhost:5000/api/send-email', { // Update URL with your backend server URL
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(formJson),
-  //     });
-  
-  //     const data = await response.json();
-  //     if (data.success) {
-  //       alert('Email sent successfully!');
-  //       setSubmitted(true);
-  //     } else {
-  //       alert('Failed to send email.');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //     alert('An error occurred while sending the email.');
-  //   }
-  
-  //   setSubmitted(true);
-  //   handleClose();
-  // };
-    // implement the email logic here
-    setSubmitted(true); // Set form submission state to true
+    console.log('New Rider:', newRider);
+    
+    
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Token not found in local storage');
+      return;
+    }
+
+    try {
+      const decodedToken = jwtDecode(token);
+      // const recipientId = decodedToken._id;
+      const userId = decodedToken.userId;
+      if (!userId) {
+        console.log('Decoded Token:', decodedToken);
+        alert('Recipient ID not found in the token');
+        return;
+      }
+
+      const response = await fetch(`http://localhost:3002/fatima/riders/signup-rider/${userId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(newRider),
+
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert('Rider added successfully!');
+        setSubmitted(true);
+        console.log('API Response:', data);
+      } else {
+        alert(`Error: ${data.message}`);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred while adding the rider.');
+    }
+
+    setSubmitted(true);
     handleClose();
   };
-
+  
   return (
     <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button onClick={handleClickOpen} style={{color:"white"}}
+       sx={{
+        color: 'black',
+        '&:hover': {
+          borderColor: 'transparent', // Hide outline on hover
+        },
+        '&:focus': {
+          outline: 'none', // Hide outline on focus
+        },
+      }}>
         Add Rider
       </Button>
       <Dialog
@@ -230,6 +222,7 @@ export default function AddRider() {
           select
           label="From"
           defaultValue="9"
+          value={selectedStart}
           onChange={handleStartChange}
           sx={{
             maxWidth: '180px',
@@ -249,6 +242,8 @@ export default function AddRider() {
           select
           label="Till"
           defaultValue={endWork.length > 0 ? endWork[0].value : ''}
+          value={selectedEnd} 
+          onChange={handleEndChange}
           sx={{
             maxWidth: '180px',
             width: isSmallScreen ? '100%' : '50%', // Adjust width based on screen size

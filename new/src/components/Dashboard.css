@@ -1,3 +1,4 @@
+
 .user-action{
     position: relative;
     border-radius: 10px;
@@ -12,6 +13,16 @@
     justify-content: space-between;
     max-width: 100%;
 }
+.cards-rider {
+    display: block;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin: auto;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    width: 45%; /* Increased width */
+    max-width: 1200px; /* Optional max-width */
+  }
 
 .user-info{
     display: flex;
@@ -101,6 +112,17 @@ margin-left: 20rem;}
 .progressUpdate{
     /* display:flex; */
     margin-left:15rem;
+    margin-bottom: 1rem;
+    
+}
+.progressUpdate .MuiCircularProgress-root {
+    color: #1ea27e; /* Your desired color */
+  }
+  
+.Rider-details{
+   
+    margin-right: 9rem;
+  
 }
 @media screen and (max-width: 1317px){
     .user-table{
@@ -128,6 +150,9 @@ margin-left: 20rem;}
     
 }
 @media screen and (max-width:1010px) {
+    .progressUpdate{
+        margin-left: 21rem;
+    }
     .cards{
         display:block;
         margin-top: 3rem;
@@ -137,6 +162,156 @@ margin-left: 20rem;}
         margin-right: 5rem;
     }
     
+}
+@media screen and (max-width:952px) {
+    .progressUpdate{
+        margin-left: 20rem;
+    }
+}
+@media screen and (max-width:925px) {
+    .progressUpdate{
+        margin-left: 18rem;
+    }
+}
+@media screen and (max-width:860px) {
+    .progressUpdate{
+        margin-left: 16rem;
+    }
+}
+@media screen and (max-width:779px) {
+    .progressUpdate{
+        margin-left: 34rem;
+    }
+}
+@media screen and (max-width:759px) {
+    .progressUpdate{
+        margin-left: 30rem;
+    }
+}
+@media screen and (max-width:690px) {
+    .progressUpdate{
+        margin-left: 26rem;
+    }
+}
+@media screen and (max-width:630px) {
+    .progressUpdate{
+        margin-left: 22rem;
+    }
+}
+@media screen and (max-width:560px) {
+    .progressUpdate{
+        margin-left: 18rem;
+    }
+}
+@media screen and (max-width:500px) {
+    .progressUpdate{
+        margin-left: 15rem;
+    }
+}
+/* overall */
+ @media screen and (max-width:430px) {
+    .cards{
+        display:block;
+        margin-top: 2rem;
+        margin-bottom:1 rem;
+        margin-left:2rem;
+        margin-right: 2rem;
+    }
+    .user-table{
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+    .user-action{
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+    .user-name{
+        margin-left: 0rem;
+    }
+    .list-action{
+        margin-left: 0;
+    }
+    .user-info img{
+        margin-top: 0.75rem;
+        height: 75%;
+    }
+    h2, h3{
+        font-size: small;
+        
+    }
+   
+}    
+/* overall again */
+@media screen and (max-width:360px) {
+    .cards{
+        display:block;
+        /* flex-direction:column; */
+        margin-top: 2rem;
+        margin-bottom:1 rem;
+        margin-left:2rem;
+        margin-right: 2rem;
+    }
+    .user-table{
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+    .user-action{
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+    .user-name{
+        margin-left: 0rem;
+    }
+    .list-action{
+        margin-left: 0;
+        
+    }
+    .action-btn{
+        margin-left: 0;
+        size:small;
+    }
+    .user-info img{
+        margin-top: 0.75rem;
+        height: 60%;
+    }
+    h2, h3{
+        font-size: small;
+        
+    }
+   
+} 
+@media screen and(max-width:353px){
+ 
+    .user-action{
+        margin-left: 0rem;
+        margin-right: 0rem;
+        /* max-width:200%; */
+    }
+    .user-name{
+        margin-left: 0rem;
+    }
+    /* .list-action{
+        width: 10px;
+        height: 10px;
+        color: #fff;
+        background: #1ea27e ;
+        border-radius: 20px;
+        font-size: 15px;
+        margin-left:0rem;
+        margin-right:0rem;
+        
+      
+    } */
+   
+    .user-info img{
+        margin-top: 0.75rem;
+        height: 50%;
+    }
+    h2, h3{
+        font-size: small;
+        
+    }
+
 }
 /* @media screen and(max-width:453px){
     .cards{

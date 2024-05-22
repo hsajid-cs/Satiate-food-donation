@@ -4,12 +4,11 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import './Dashboard.css'
+import Collapse from '@mui/material/Collapse';
+import './Dashboard.css';
+import fatima from './images/aboutus/fatima.jpg';
+import hira from './images/aboutus/hira.jpg';
 
 const CardContainer = styled('div')({
   display: 'grid',
@@ -19,23 +18,17 @@ const CardContainer = styled('div')({
   margin: '0 auto',
 });
 
-const names = ['Hira Sajid', 'Fatima Nisar', 'Sadia Masood'];
-const imageUrls = ['https://source.unsplash.com/random/1', 'https://source.unsplash.com/random/2', 'https://source.unsplash.com/random/3'];
-const descriptions = ['Looks like a cinnamon roll.Is a cinnamon roll.', 'Looks like could kill you.Could kill you', 'Looks like she could kill you but is a cinnamon roll.'];
+const names = ['Hira Sajid','Sadia Masood', 'Fatima Nisar'];
+const imageUrls = [hira, 'https://source.unsplash.com/random/3',fatima];
+const descriptions = ['Looks like a cinnamon roll, is actually a cinnamon roll.','Looks like she could kill you, is actually a cinnamon roll.', 'Looks like she could kill you, could actually kill you'];
 
 const ThreeCardPage = () => {
-  const [expanded, setExpanded] = React.useState([false, false, false]);
-
-  const handleExpandClick = (index) => {
-    const newExpanded = [...expanded];
-    newExpanded[index] = !newExpanded[index];
-    setExpanded(newExpanded);
-  };
+  const [expanded] = React.useState([true, true, true]);
 
   return (
     <div>
       <div className="cards">
-        <CardContainer>
+        <CardContainer style={{textAlign: 'center'}}>
           {[0, 1, 2].map((index) => (
             <Card
               key={index}
@@ -60,18 +53,9 @@ const ThreeCardPage = () => {
                   {descriptions[index]}
                 </Typography>
               </CardContent>
-              <CardActions disableSpacing>
-                <IconButton
-                  onClick={() => handleExpandClick(index)}
-                  aria-expanded={expanded[index]}
-                  aria-label="show more"
-                >
-                  <ExpandMoreIcon />
-                </IconButton>
-              </CardActions>
               <Collapse in={expanded[index]} timeout="auto" unmountOnExit>
                 <CardContent>
-                  <Typography paragraph>Details:</Typography>
+                  {/*  <Typography paragraph>Details:</Typography> */}
                   <Typography paragraph>
                     {`Additional details for ${names[index]}`}
                   </Typography>

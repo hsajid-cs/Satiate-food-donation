@@ -5,17 +5,34 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import { jwtDecode } from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 
 export default function ListFood() {
   const [open, setOpen] = React.useState(false);
   const [servingSize, setServingSize] = React.useState(20);
-  const [status, setStatus] = React.useState('pending');
+  const [description, setDescription] = React.useState('');
+  const [expiry, setExpiry] = React.useState('');
+  const [isFormSubmitting, setIsFormSubmitting] = React.useState(false);
+  const navigate = useNavigate();
   const handleClickOpen = () => {
     setOpen(true);
   };
 
+  const setInitialValues = () => {
+    setDescription('');
+      setExpiry('');
+      setServingSize(20);
+      setIsFormSubmitting(false);
+  };
+
   const handleClose = () => {
-    setOpen(false);
+    if (!isFormSubmitting ||window.confirm('Are you sure you want to close the dialog?')) {
+      setOpen(false);
+      
+    }
+    setInitialValues();
+    navigate('/dashboard-donor');
   };
 
   const handleServingSizeChange = (event) => {
@@ -27,15 +44,54 @@ export default function ListFood() {
     }
   };
   
-  const handleAddFood = (event) => {
+  const handleAddFood = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const formJson = Object.fromEntries(formData.entries());
-    const email = formJson.email;
-    // Assuming some function to update the status, you can replace this with your actual logic
-    setStatus('listed');
-    handleClose();
+    
+    // Retrieve token from local storage
+    const token = localStorage.getItem('token');
+    console.log('Token:', token);
+    
+    if (!token) {
+      console.error('Token not found in local storage');
+      // Handle error, show error message to the user, etc.
+      return;
+    }
+    
+    try {
+      const decodedToken = jwtDecode(token);
+    const donorId = decodedToken.userId;
+    console.log('Donor ID:', donorId);
+      const response = await fetch(`http://localhost:3002/fatima/donors/add-donation/${donorId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, // Include token in the Authorization header
+          // Add any other headers if required
+        },
+        body: JSON.stringify({
+          food_type: formJson.description,
+          quantity: formJson.serving,
+          expiry_date: formJson.expiry,
+          status: 'pending', // You can adjust this based on your requirements
+          // pickup_time: new Date().toISOString(), // Assuming pickup time is current time
+        }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to add donation');
+      }
+      const data = await response.json();
+      console.log('Donation added successfully:', data.newDonation);
+     // Update status to reflect that the donation has been listed
+     setIsFormSubmitting(true);
+      handleClose();
+    } catch (error) {
+      console.error('Error adding donation:', error);
+      // Handle error, show error message to the user, etc.
+    }
   };
+  
 
 
   return (
@@ -49,13 +105,6 @@ export default function ListFood() {
         PaperProps={{
           component: 'form',
           onSubmit: handleAddFood
-          // (event) => {
-          //   event.preventDefault();
-          //   const formData = new FormData(event.currentTarget);
-          //   const formJson = Object.fromEntries(formData.entries());
-          //   const email = formJson.email;
-          //   handleClose();
-          // },
         }}
       >
         <DialogTitle>List New Food</DialogTitle>
@@ -74,6 +123,8 @@ export default function ListFood() {
             multiline
             fullWidth
             variant="outlined"
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
           />
           <TextField
             autoFocus
@@ -93,13 +144,15 @@ export default function ListFood() {
             }}
             fullWidth
             variant="outlined"
+            value={expiry}
+            onChange={(event) => setExpiry(event.target.value)}
           />
           <TextField
             autoFocus
             required
             margin="dense"
-            id="contact"
-            name="contact"
+            id="serving"
+            name="serving"
             type="number"
             value={servingSize} // Set the value of the input field to the current serving size state
             onChange={handleServingSizeChange} // Call handleServingSizeChange when the value changes
@@ -107,7 +160,7 @@ export default function ListFood() {
             fullWidth
             variant="outlined"
           />
-          <TextField
+          {/* <TextField
             autoFocus
             required
             margin="dense"
@@ -117,7 +170,7 @@ export default function ListFood() {
             type="file"
             fullWidth
             variant="outlined"
-          />
+          /> */}
   
         </DialogContent>
         <DialogActions>

@@ -1,6 +1,6 @@
 import React from 'react'
 import './Home.css'
-import video from './images/action2overlay.mp4'
+import video from './images/action2.mp4'
 
 export const Home = () => {
   return (

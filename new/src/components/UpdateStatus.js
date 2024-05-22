@@ -6,22 +6,61 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import MenuItem from '@mui/material/MenuItem';
+import { jwtDecode } from 'jwt-decode';
 
 const statusOptions = [
-  { value: 'Picked', label: 'Picked' },
-  { value: 'Delivered', label: 'Delivered' },
+  { value: 'in_progress', label: 'Picked' },
+  { value: 'delivered', label: 'Delivered' },
 ];
 
-export default function UpdateStatus({ open, handleClose, onStatusChange }) {
-  const handleSubmit = (event) => {
+export default function UpdateStatus() {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const status = formData.get('status');
-    onStatusChange(status);
+    console.log(status);
+    const key =localStorage.getItem('token');
+      const riderId = jwtDecode(key).userId;
+      console.log(riderId);
+      console.log(riderId, status);
+    try {
+      
+      
+      const response = await fetch(`http://localhost:3002/fatima/riders/rider/update-last-delivered-donation-status/${riderId}/${status}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          // Add your authentication token if needed
+          'Authorization': `Bearer ${key}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Failed to update status');
+      }
+      handleClose();
+    } catch (err) {
+      console.error('Error updating status:', err);
+    } 
+    // const formData = new FormData(event.currentTarget);
+    // const status = formData.get('status');
     handleClose();
   };
 
   return (
+    <>
+    <Button onClick={handleClickOpen} style={{color:'white'}}>
+        Update Status
+      </Button>
     <Dialog
       open={open}
       onClose={handleClose}
@@ -56,5 +95,6 @@ export default function UpdateStatus({ open, handleClose, onStatusChange }) {
         <Button type="submit">Update</Button>
       </DialogActions>
     </Dialog>
+    </>
   );
 }

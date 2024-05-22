@@ -6,6 +6,7 @@ import { Modal } from './Modal';
 import './Navbar.css';
 import styled from 'styled-components';
 import { GlobalStyle } from './GlobalStyle';
+import { jwtDecode } from 'jwt-decode';
 
 const PositionedModal = styled.div`
   position: fixed; 
@@ -32,6 +33,7 @@ function Navbar() {
   const [button1, setButton1] = useState(true);
   const [button2, setButton2] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  let userIsLoggedIn = localStorage.getItem('token') !== null;
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -46,15 +48,19 @@ function Navbar() {
 
   useEffect(() => {
     // Check if user is logged in (You should replace this with your actual authentication logic)
-    const userIsLoggedIn = localStorage.getItem('token') !== null;
-    setIsLoggedIn(userIsLoggedIn);
-
-  useEffect(() => {
-    // Check if user is logged in (You should replace this with your actual authentication logic)
-    const userIsLoggedIn = false;
+    userIsLoggedIn = localStorage.getItem('token') !== null;
     setIsLoggedIn(userIsLoggedIn);
     
-  }, []);
+  }, [userIsLoggedIn]);
+
+
+  function deleteToken() {
+    const tokenKey = 'token'; // Adjust the key if necessary
+    localStorage.removeItem(tokenKey);
+    console.log(`Token with key ${tokenKey} has been deleted.`);
+  }
+
+  
   const openModal = () => {
     setShowModal(prev => !prev);
   }
@@ -72,6 +78,32 @@ function Navbar() {
     openModal();
   };
 
+  function displayAllTokens() {
+    const allTokens = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith('token')) {
+        const token = localStorage.getItem(key);
+        try {
+          const decodedToken = jwtDecode(token);
+          console.log('Decoded Token:', decodedToken); // Log the decoded token
+          const recipientId = decodedToken._id; // Extract recipient ID from the _id field
+          allTokens.push({ key, token, recipientId });
+        } catch (error) {
+          console.error(`Error decoding token for key ${key}:`, error);
+        }
+      }
+    }
+    if (allTokens.length === 0) {
+      console.log('No tokens found in local storage.');
+    } else {
+      console.log('All tokens in local storage:');
+      allTokens.forEach(({ key, token, recipientId }) => {
+        console.log(`${key}: ${token}, Recipient ID: ${recipientId}`);
+      });
+    }
+  }
+
   const showButton = () => {
     if (window.innerWidth <= 960) {
       setButton1(false);
@@ -88,8 +120,13 @@ function Navbar() {
 
   const handleLogout = (e) => {
     e.preventDefault();
+    closeMobileMenu();
     // Log out logic here
+    displayAllTokens();
+    deleteToken();
+    displayAllTokens();
     setIsLoggedIn(false);
+    // setIsLoggedIn(false);
     navigate('/');
   };
 
@@ -109,13 +146,6 @@ function Navbar() {
             </div>
             
             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-<<<<<<< HEAD
-            {window.innerWidth <= 960 && (
-                <li className="nav-item mobile-only">
-                  <Link to="/" className="nav-links" onClick={closeMobileMenu}>
-                    Sign Up  
-                  </Link>
-=======
             {!isLoggedIn && window.innerWidth <= 960 && (
                 <li className="nav-item mobile-only">
                   <div className="nav-links" onClick={handleSignupLinkClick}>
@@ -125,9 +155,6 @@ function Navbar() {
               )
             }
 
-<<<<<<< HEAD
-            {window.innerWidth <= 960 && (
-=======
             {!isLoggedIn && window.innerWidth <= 960 && (
                 <li className="nav-item mobile-only">
                   <Link to="/login" className="nav-links" onClick={closeMobileMenu}>
@@ -137,8 +164,6 @@ function Navbar() {
               )
             }
 
-<<<<<<< HEAD
-=======
             {isLoggedIn && window.innerWidth <= 960 && (
                 <li className="nav-item mobile-only">
                   <div className="nav-links" onClick={handleLogout}>
@@ -147,10 +172,15 @@ function Navbar() {
                 </li>
               )
             }
->>>>>>> 23e31c0755d90e4cbfb2b85bbc3b190a31a4e929
               <li className='nav-item'>
                 <Link to='/stories' className='nav-links' onClick={closeMobileMenu}>
                   Stories
+                </Link>
+              </li>
+
+              <li className='nav-item'>
+                <Link to='/analytics' className='nav-links' onClick={closeMobileMenu}>
+                  Analytics
                 </Link>
               </li>
 
@@ -167,17 +197,11 @@ function Navbar() {
               </li>
 
             </ul>
-<<<<<<< HEAD
-            <div className="btn-wrapper">
-            {isLoggedIn ? (
-              <>
-=======
             
             
             {isLoggedIn ? (
               <>
               <div className='user-links-container'>
->>>>>>> 23e31c0755d90e4cbfb2b85bbc3b190a31a4e929
                   <Link to="/notifications" className='user-links'>
                     <i className="fas fa-bell" />
                   </Link>
