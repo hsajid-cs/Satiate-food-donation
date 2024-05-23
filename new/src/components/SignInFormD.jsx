@@ -18,10 +18,9 @@ const SignInFormD = () => {
     const [resName, setResName] = useState('');
 
     const navigate = useNavigate();
-
     const handleSelectChange = (event) => {
         setSelectedValue(event.target.value);
-    };
+      };
 
     const getCurrentPosition = () => {
         return new Promise((resolve, reject) => {

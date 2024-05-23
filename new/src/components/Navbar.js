@@ -43,12 +43,18 @@ function Navbar() {
     e.preventDefault();
     navigate('/login');    
     closeMobileMenu();
+    navigate('/login');    closeMobileMenu();
+
   }
 
 
   useEffect(() => {
     // Check if user is logged in (You should replace this with your actual authentication logic)
+
     userIsLoggedIn = localStorage.getItem('token') !== null;
+
+    const userIsLoggedIn = false;
+
     setIsLoggedIn(userIsLoggedIn);
     
   }, [userIsLoggedIn]);
