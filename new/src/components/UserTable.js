@@ -20,7 +20,7 @@ export default function DenseTable({ data }) {
         <TableHead>
           <TableRow>
             <TableCell>Donation</TableCell>
-            <TableCell align="right">Serving</TableCell>
+            {/* <TableCell align="right">Serving</TableCell> */}
             <TableCell align="right">Listing Date&nbsp;</TableCell>
             <TableCell align="right">Recipient&nbsp;</TableCell>
           </TableRow>

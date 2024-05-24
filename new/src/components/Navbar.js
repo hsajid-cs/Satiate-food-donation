@@ -53,7 +53,7 @@ function Navbar() {
 
     userIsLoggedIn = localStorage.getItem('token') !== null;
 
-    const userIsLoggedIn = false;
+    // const userIsLoggedIn = false;
 
     setIsLoggedIn(userIsLoggedIn);
     

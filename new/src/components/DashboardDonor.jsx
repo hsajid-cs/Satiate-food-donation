@@ -239,7 +239,7 @@ const DashboardDonor = () => {
         </CardContainer>)}
       </div>
     <div className="user-table">
-    {delieveredDonations.length ===0?( <UserTable data={delieveredDonations} />):(<p></p>)}
+    {delieveredDonations.length > 0?( <UserTable data={delieveredDonations} />):(<p></p>)}
     </div>
     </>
   );
